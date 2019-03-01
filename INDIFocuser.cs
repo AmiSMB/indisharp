@@ -26,7 +26,7 @@ namespace INDI
     {
         public INDIFocuserNumberType Type;
         public List<INDINumber> Values;
-        public INDIFocuserNumberEventArgs(INumberVector vector, string dev) : base(vector, dev)
+        public INDIFocuserNumberEventArgs(NumberVector vector, string dev) : base(vector, dev)
         {
             Values = vector.Values;
             switch (vector.Name)
@@ -63,7 +63,7 @@ namespace INDI
     {
         public INDIFocuserSwitchType Type;
         public List<INDISwitch> Values;
-        public INDIFocuserSwitchEventArgs(ISwitchVector vector, string dev) : base(vector, dev)
+        public INDIFocuserSwitchEventArgs(SwitchVector vector, string dev) : base(vector, dev)
         {
             Values = vector.Values;
             switch (vector.Name)
@@ -91,7 +91,7 @@ namespace INDI
     {
         public INDIFocuserTextType Type;
         public List<INDIText> Values;
-        public INDIFocuserTextEventArgs(ITextVector vector, string dev) : base(vector, dev)
+        public INDIFocuserTextEventArgs(TextVector vector, string dev) : base(vector, dev)
         {
             Values = vector.Values;
             switch (vector.Name)
@@ -162,28 +162,28 @@ namespace INDI
         {
             if (!client)
             {
-                AddNumberVector(new INumberVector(Name, "FOCUS_SPEED", "Select focus speed", "Main Control", "rw", "", new List<INDINumber>
+                AddNumberVector(new NumberVector(Name, "FOCUS_SPEED", "Select focus speed", "Main Control", "rw", "", new List<INDINumber>
             {
                 new INDINumber("FOCUS_SPEED_VALUE", "Set focuser speed", "%3.1f", 0, 1000.0, 0.1, 0.0)
             }));
-                AddSwitchVector(new ISwitchVector(Name, "FOCUS_MOTION", "Move focuser", "Motion Control", "rw", "OneOfMany", new List<INDISwitch>
+                AddSwitchVector(new SwitchVector(Name, "FOCUS_MOTION", "Move focuser", "Motion Control", "rw", "OneOfMany", new List<INDISwitch>
             {
                 new INDISwitch("FOCUS_INWARD", "Focus inward", true),
                 new INDISwitch("FOCUS_OUTWARD", "Focus outward", false)
             }));
-                AddNumberVector(new INumberVector(Name, "FOCUS_TIMER", "Focuser speed", "Motion Control", "rw", "", new List<INDINumber>
+                AddNumberVector(new NumberVector(Name, "FOCUS_TIMER", "Focuser speed", "Motion Control", "rw", "", new List<INDINumber>
             {
                 new INDINumber("FOCUS_TIMER_VALUE", "Focus in the direction, speed and time selected", "%4.0f", 0.00, 1000.0, 1.0, 0.0)
             }));
-                AddNumberVector(new INumberVector(Name, "REL_FOCUS_POSITION", "Focuser Relative position", "Motion Control", "rw", "", new List<INDINumber>
+                AddNumberVector(new NumberVector(Name, "REL_FOCUS_POSITION", "Focuser Relative position", "Motion Control", "rw", "", new List<INDINumber>
             {
                 new INDINumber("FOCUS_RELATIVE_POSITION", "Focuser Relative position", "%5.0f", 0.00, 50000.0, 1, 0.0)
             }));
-                AddNumberVector(new INumberVector(Name, "ABS_FOCUS_POSITION", "Focuser Absolute position", "Motion Control", "rw", "", new List<INDINumber>
+                AddNumberVector(new NumberVector(Name, "ABS_FOCUS_POSITION", "Focuser Absolute position", "Motion Control", "rw", "", new List<INDINumber>
             {
                 new INDINumber("FOCUS_ABSOLUTE_POSITION", "Focuser Absolute position", "%5.0f", 0.00, 50000.0, 1, 0.0)
             }));
-                AddSwitchVector(new ISwitchVector(Name, "FOCUS_ABORT_MOTION", "Abort focuser motion", "Motion Control", "rw", "AtMostOne", new List<INDISwitch>
+                AddSwitchVector(new SwitchVector(Name, "FOCUS_ABORT_MOTION", "Abort focuser motion", "Motion Control", "rw", "AtMostOne", new List<INDISwitch>
             {
                 new INDISwitch("ABORT", "Abort focuser motion", false)
             }));
@@ -269,7 +269,7 @@ namespace INDI
             {
                 try
                 {
-                    return GetNumber("FOCUS_SPEED", "FOCUS_SPEED_VALUE").value;
+                    return GetNumber("FOCUS_SPEED", "FOCUS_SPEED_VALUE").Value;
                 }
                 catch
                 {
@@ -294,7 +294,7 @@ namespace INDI
             {
                 try
                 {
-                    return GetNumber("REL_FOCUS_POSITION", "FOCUS_RELATIVE_POSITION").value;
+                    return GetNumber("REL_FOCUS_POSITION", "FOCUS_RELATIVE_POSITION").Value;
                 }
                 catch { }
                 return 0;
@@ -315,7 +315,7 @@ namespace INDI
             {
                 try
                 {
-                    return GetNumber("ABS_FOCUS_POSITION", "FOCUS_ABSOLUTE_POSITION").value;
+                    return GetNumber("ABS_FOCUS_POSITION", "FOCUS_ABSOLUTE_POSITION").Value;
                 }
                 catch { }
                 return 0;

@@ -40,7 +40,7 @@ namespace INDI
     {
         public INDIDetectorNumberType Type;
         public List<INDINumber> Values;
-        public INDIDetectorNumberEventArgs(INumberVector vector, string dev) : base(vector, dev)
+        public INDIDetectorNumberEventArgs(NumberVector vector, string dev) : base(vector, dev)
         {
             Values = vector.Values;
             switch (vector.Name)
@@ -80,7 +80,7 @@ namespace INDI
     {
         public INDIDetectorSwitchType Type;
         public List<INDISwitch> Values;
-        public INDIDetectorSwitchEventArgs(ISwitchVector vector, string dev) : base(vector, dev)
+        public INDIDetectorSwitchEventArgs(SwitchVector vector, string dev) : base(vector, dev)
         {
             Values = vector.Values;
             switch (vector.Name)
@@ -105,7 +105,7 @@ namespace INDI
     {
         public INDIDetectorTextType Type;
         public List<INDIText> Values;
-        public INDIDetectorTextEventArgs(ITextVector vector, string dev) : base(vector, dev)
+        public INDIDetectorTextEventArgs(TextVector vector, string dev) : base(vector, dev)
         {
             Values = vector.Values;
             switch (vector.Name)
@@ -183,21 +183,21 @@ namespace INDI
 		{
 			EnableBLOB (true);
 			if (!client) {
-				AddNumberVector (new INumberVector (Name, "DETECTOR_CAPTURE", "Capture", "Main Control", "rw", "", new List<INDINumber> {
+				AddNumberVector (new NumberVector (Name, "DETECTOR_CAPTURE", "Capture", "Main Control", "rw", "", new List<INDINumber> {
 					new INDINumber ("DETECTOR_CAPTURE_VALUE", "Duration (s)", "%5.2f", 0.05, 10000.0, 0.05, 1.0)
 				}));
-				AddSwitchVector (new ISwitchVector (Name, "DETECTOR_ABORT_CAPTURE", "Expose Abort", "Main Control", "rw", "AtMostOne", new List<INDISwitch> {
+				AddSwitchVector (new SwitchVector (Name, "DETECTOR_ABORT_CAPTURE", "Expose Abort", "Main Control", "rw", "AtMostOne", new List<INDISwitch> {
 					new INDISwitch ("ABORT", "Abort", false)
 				}));
-				AddNumberVector (new INumberVector (Name, "DETECTOR_TEMPERATURE", "Temperature", "Main Control", "rw", "", new List<INDINumber> {
+				AddNumberVector (new NumberVector (Name, "DETECTOR_TEMPERATURE", "Temperature", "Main Control", "rw", "", new List<INDINumber> {
 					new INDINumber ("DETECTOR_TEMPERATURE_VALUE", "Temperature (C)", "%5.2f", -50.0, 50.0, 0.0, 20.0)
 				}));
-				AddNumberVector (new INumberVector (Name, "DETECTOR_INFO", "Detector Information", "Image Info", "ro", "", new List<INDINumber> {
+				AddNumberVector (new NumberVector (Name, "DETECTOR_INFO", "Detector Information", "Image Info", "ro", "", new List<INDINumber> {
 					new INDINumber ("DETECTOR_SAMPLERATE", "Bandwidth (Hz)", "%18.2f", 0.01, 1.0e+15, 0.01, 1.0e+6),
 					new INDINumber ("DETECTOR_FREQUENCY", "Observed frequency (Hz)", "%18.2f", 0.01, 1.0e+15, 0.01, 1.42e+9),
 					new INDINumber ("DETECTOR_BITSPERSAMPLE", "Bits per sample", "%3.0f", 1, 64, 1, 8)
 				}));
-				AddBlobVector (new IBlobVector (Name, "DETECTOR", "Capture", "Data Streams", "ro", "", new List<INDIBlob> {
+				AddBlobVector (new BlobVector (Name, "DETECTOR", "Capture", "Data Streams", "ro", "", new List<INDIBlob> {
 					new INDIBlob ("CONTINUUM", Name + " continuum data", ".fits", new byte[1], 1),
 					new INDIBlob ("SPECTRUM", Name + " spectrum data", ".fits", new byte[1], 1),
 				}));
@@ -293,8 +293,8 @@ namespace INDI
                     INDIClient caller = (INDIClient)sender;
                     for (int i = 0; i < e.Vector.Values.Count; i++)
                     {
-                        Console.WriteLine("Received BLOB " + e.Vector.Values[i].Name + " of size " + e.Vector.Values[i].size + " from device " + e.Device + "@" + caller.Address + ":" + caller.Port);
-                        IsNewBlob?.Invoke(this, new INDIDetectorBlobEventArgs(e.Vector.Values[i].value, e.Vector.Values[i].Name, e.Vector.Name, e.Vector.Values[0].format));
+                        Console.WriteLine("Received BLOB " + e.Vector.Values[i].Name + " of size " + e.Vector.Values[i].Size + " from device " + e.Device + "@" + caller.Address + ":" + caller.Port);
+                        IsNewBlob?.Invoke(this, new INDIDetectorBlobEventArgs(e.Vector.Values[i].Value, e.Vector.Values[i].Name, e.Vector.Name, e.Vector.Values[0].Format));
                     }
                 }
             }
@@ -312,7 +312,7 @@ namespace INDI
             {
                 try
                 {
-                    return GetNumber("DETECTOR_CAPTURE", "DETECTOR_CAPTURE_VALUE").value;
+                    return GetNumber("DETECTOR_CAPTURE", "DETECTOR_CAPTURE_VALUE").Value;
                 }
                 catch
                 {
@@ -327,7 +327,7 @@ namespace INDI
 			{
 				try
 				{
-					return GetNumber("DETECTOR_SETTINGS", "DETECTOR_SAMPLERATE").value;
+					return GetNumber("DETECTOR_SETTINGS", "DETECTOR_SAMPLERATE").Value;
 				}
 				catch
 				{
@@ -350,7 +350,7 @@ namespace INDI
 			{
 				try
 				{
-					return GetNumber("DETECTOR_SETTINGS", "DETECTOR_FREQUENCY").value;
+					return GetNumber("DETECTOR_SETTINGS", "DETECTOR_FREQUENCY").Value;
 				}
 				catch
 				{
@@ -373,7 +373,7 @@ namespace INDI
 			{
 				try
 				{
-					return GetNumber("DETECTOR_INFO", "DETECTOR_BITSPERSAMPLE").value;
+					return GetNumber("DETECTOR_INFO", "DETECTOR_BITSPERSAMPLE").Value;
 				}
 				catch
 				{
@@ -396,7 +396,7 @@ namespace INDI
             {
                 try
                 {
-                    return GetSwitch("DETECTOR_COOLER", "COOLER_ON").value;
+                    return GetSwitch("DETECTOR_COOLER", "COOLER_ON").Value;
                 }
                 catch { }
                 return false;
@@ -417,7 +417,7 @@ namespace INDI
             {
                 try
                 {
-                    return GetNumber("DETECTOR_COOLER_POWER", "DETECTOR_COOLER_VALUE").value;
+                    return GetNumber("DETECTOR_COOLER_POWER", "DETECTOR_COOLER_VALUE").Value;
                 }
                 catch { }
                 return 0;
@@ -451,7 +451,7 @@ namespace INDI
             {
                 try
                 {
-                    return GetNumber("DETECTOR_CAPTURE", "DETECTOR_CAPTURE_VALUE").min;
+                    return GetNumber("DETECTOR_CAPTURE", "DETECTOR_CAPTURE_VALUE").Min;
                 }
                 catch
                 {
@@ -466,7 +466,7 @@ namespace INDI
             {
                 try
                 {
-                    return GetNumber("DETECTOR_CAPTURE", "DETECTOR_CAPTURE_VALUE").max;
+                    return GetNumber("DETECTOR_CAPTURE", "DETECTOR_CAPTURE_VALUE").Max;
                 }
                 catch
                 {
@@ -481,7 +481,7 @@ namespace INDI
             {
                 try
                 {
-                    return GetNumber("DETECTOR_CAPTURE", "DETECTOR_CAPTURE_VALUE").step;
+                    return GetNumber("DETECTOR_CAPTURE", "DETECTOR_CAPTURE_VALUE").Step;
                 }
                 catch
                 {
@@ -496,7 +496,7 @@ namespace INDI
             {
                 try
                 {
-                    return GetNumber("DETECTOR_TEMPERATURE", "DETECTOR_TEMPERATURE_VALUE").value;
+                    return GetNumber("DETECTOR_TEMPERATURE", "DETECTOR_TEMPERATURE_VALUE").Value;
                 }
                 catch
                 {

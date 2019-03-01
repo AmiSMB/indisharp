@@ -40,7 +40,7 @@ namespace INDI
     {
         public INDICameraNumberType Type;
         public List<INDINumber> Values;
-        public INDICameraNumberEventArgs(INumberVector vector, string dev) : base(vector, dev)
+        public INDICameraNumberEventArgs(NumberVector vector, string dev) : base(vector, dev)
         {
             Values = vector.Values;
             switch (vector.Name)
@@ -86,7 +86,7 @@ namespace INDI
     {
         public INDICameraSwitchType Type;
         public List<INDISwitch> Values;
-        public INDICameraSwitchEventArgs(ISwitchVector vector, string dev) : base(vector, dev)
+        public INDICameraSwitchEventArgs(SwitchVector vector, string dev) : base(vector, dev)
         {
             Values = vector.Values;
             switch (vector.Name)
@@ -120,7 +120,7 @@ namespace INDI
     {
         public INDICameraTextType Type;
         public List<INDIText> Values;
-        public INDICameraTextEventArgs(ITextVector vector, string dev) : base(vector, dev)
+        public INDICameraTextEventArgs(TextVector vector, string dev) : base(vector, dev)
         {
             Values = vector.Values;
             switch (vector.Name)
@@ -206,43 +206,43 @@ namespace INDI
             EnableBLOB(true);
             if (!client)
             {
-                AddNumberVector(new INumberVector(Name, "CCD_EXPOSURE", "Exposure", "Main Control", "rw", "", new List<INDINumber>
+                AddNumberVector(new NumberVector(Name, "CCD_EXPOSURE", "Exposure", "Main Control", "rw", "", new List<INDINumber>
             {
                 new INDINumber("CCD_EXPOSURE_VALUE", "Duration (s)", "%5.2f", 0.05, 10000.0, 0.05, 1.0)
             }));
-                AddSwitchVector(new ISwitchVector(Name, "CCD_ABORT_EXPOSURE", "Expose Abort", "Main Control", "rw", "AtMostOne", new List<INDISwitch>
+                AddSwitchVector(new SwitchVector(Name, "CCD_ABORT_EXPOSURE", "Expose Abort", "Main Control", "rw", "AtMostOne", new List<INDISwitch>
             {
                 new INDISwitch("ABORT", "Abort", false)
             }));
-                AddNumberVector(new INumberVector(Name, "CCD_TEMPERATURE", "Temperature", "Main Control", "rw", "", new List<INDINumber>
+                AddNumberVector(new NumberVector(Name, "CCD_TEMPERATURE", "Temperature", "Main Control", "rw", "", new List<INDINumber>
             {
                 new INDINumber("CCD_TEMPERATURE_VALUE", "Temperature (C)", "%5.2f", -50.0, 50.0, 0.0, 20.0)
             }));
-                AddNumberVector(new INumberVector(Name, "CCD_FRAME", "Frame", "Image Settings", "rw", "", new List<INDINumber>
+                AddNumberVector(new NumberVector(Name, "CCD_FRAME", "Frame", "Image Settings", "rw", "", new List<INDINumber>
             {
                 new INDINumber("X", "Left", "%4.0f", 0.0, 16000.0, 1.0, 0.0),
                 new INDINumber("Y", "Top", "%4.0f", 0.0, 16000.0, 1.0, 0.0),
                 new INDINumber("WIDTH", "Width", "%4.0f", 0.0, 16000.0, 1.0, 16000.0),
                 new INDINumber("HEIGHT", "Height", "%4.0f", 0.0, 16000.0, 1.0, 16000.0)
             }));
-                AddNumberVector(new INumberVector(Name, "CCD_BINNING", "Binning", "Image Settings", "rw", "", new List<INDINumber>
+                AddNumberVector(new NumberVector(Name, "CCD_BINNING", "Binning", "Image Settings", "rw", "", new List<INDINumber>
             {
                 new INDINumber("HOR_BIN", "X", "%2.0f", 1.0, 4.0, 1.0, 1.0),
                 new INDINumber("VER_BIN", "Y", "%2.0f", 1.0, 4.0, 1.0, 1.0)
             }));
-                AddSwitchVector(new ISwitchVector(Name, "CCD_COMPRESSION", "Image", "Image Settings", "rw", "OneOfMany", new List<INDISwitch>
+                AddSwitchVector(new SwitchVector(Name, "CCD_COMPRESSION", "Image", "Image Settings", "rw", "OneOfMany", new List<INDISwitch>
             {
                 new INDISwitch("CCD_COMPRESS", "Compress", false),
                 new INDISwitch("CCD_RAW", "Raw", true)
             }));
-                AddSwitchVector(new ISwitchVector(Name, "CCD_FRAME_TYPE", "Frame Type", "Image Settings", "rw", "OneOfMany", new List<INDISwitch>
+                AddSwitchVector(new SwitchVector(Name, "CCD_FRAME_TYPE", "Frame Type", "Image Settings", "rw", "OneOfMany", new List<INDISwitch>
             {
                 new INDISwitch("FRAME_LIGHT", "Light", true),
                 new INDISwitch("FRAME_BIAS", "Bias", false),
                 new INDISwitch("FRAME_DARK", "Dark", false),
                 new INDISwitch("FRAME_FLAT", "Flat", false)
             }));
-                AddNumberVector(new INumberVector(Name, "CCD_INFO", "CCD Information", "Image Info", "ro", "", new List<INDINumber>
+                AddNumberVector(new NumberVector(Name, "CCD_INFO", "CCD Information", "Image Info", "ro", "", new List<INDINumber>
             {
                 new INDINumber("CCD_MAX_X", "Resolution x", "%4.0f", 1.0, 16000.0, 0.0, 16000.0),
                 new INDINumber("CCD_MAX_Y", "Resolution y", "%4.0f", 1.0, 16000.0, 0.0, 16000.0),
@@ -251,13 +251,13 @@ namespace INDI
                 new INDINumber("CCD_PIXEL_SIZE_Y", "Pixel size Y", "%5.2f", 1.0, 40.0, 0.0, 9.0),
                 new INDINumber("CCD_BITSPERPIXEL", "Bits per pixel", "%3.0f", 8.0, 64.0, 0.0, 16.0)
             }));
-                AddTextVector(new ITextVector(Name, "CCD_CFA", "Bayer Info", "Image Info", "ro", "", new List<INDIText>
+                AddTextVector(new TextVector(Name, "CCD_CFA", "Bayer Info", "Image Info", "ro", "", new List<INDIText>
             {
                 new INDIText("CFA_OFFSET_X", "X Offset", "0"),
                 new INDIText("CFA_OFFSET_Y", "Y Offset", "0"),
                 new INDIText("CFA_TYPE", "Filter", "")
             }));
-                AddBlobVector(new IBlobVector(Name, "CCD", "Image Data", "Image Streams", "ro", "", new List<INDIBlob>
+                AddBlobVector(new BlobVector(Name, "CCD", "Image Data", "Image Streams", "ro", "", new List<INDIBlob>
                 {
                     new INDIBlob("CCD1", Name + " image data", ".fits", new byte[1], 1),
                 }));
@@ -363,8 +363,8 @@ namespace INDI
                     INDIClient caller = (INDIClient)sender;
                     for (int i = 0; i < e.Vector.Values.Count; i++)
                     {
-                        Console.WriteLine("Received BLOB " + e.Vector.Values[i].Name + " of size " + e.Vector.Values[i].size + " from device " + e.Device + "@" + caller.Address + ":" + caller.Port);
-                        IsNewBlob?.Invoke(this, new INDICameraBlobEventArgs(e.Vector.Values[i].value, e.Vector.Values[i].Name, e.Vector.Name, e.Vector.Values[0].format));
+                        Console.WriteLine("Received BLOB " + e.Vector.Values[i].Name + " of size " + e.Vector.Values[i].Size + " from device " + e.Device + "@" + caller.Address + ":" + caller.Port);
+                        IsNewBlob?.Invoke(this, new INDICameraBlobEventArgs(e.Vector.Values[i].Value, e.Vector.Values[i].Name, e.Vector.Name, e.Vector.Values[0].Format));
                     }
                 }
             }
@@ -392,7 +392,7 @@ namespace INDI
             {
                 try
                 {
-                    return GetSwitch("CCD_COMPRESSION", "CCD_COMPRESSION_ON").value;
+                    return GetSwitch("CCD_COMPRESSION", "CCD_COMPRESSION_ON").Value;
                 }
                 catch
                 {
@@ -407,7 +407,7 @@ namespace INDI
             {
                 try
                 {
-                    Int16.Parse(GetText("CCD_CFA", "CFA_OFFSET_X").value);
+                    Int16.Parse(GetText("CCD_CFA", "CFA_OFFSET_X").Value);
                 }
                 catch
                 {
@@ -422,7 +422,7 @@ namespace INDI
             {
                 try
                 {
-                    Int16.Parse(GetText("CCD_CFA", "CFA_OFFSET_Y").value);
+                    Int16.Parse(GetText("CCD_CFA", "CFA_OFFSET_Y").Value);
                 }
                 catch
                 {
@@ -437,7 +437,7 @@ namespace INDI
             {
                 try
                 {
-                    return GetNumber("CCD_EXPOSURE", "CCD_EXPOSURE_VALUE").value;
+                    return GetNumber("CCD_EXPOSURE", "CCD_EXPOSURE_VALUE").Value;
                 }
                 catch
                 {
@@ -452,7 +452,7 @@ namespace INDI
             {
                 try
                 {
-                    return GetSwitch("CCD_COOLER", "COOLER_ON").value;
+                    return GetSwitch("CCD_COOLER", "COOLER_ON").Value;
                 }
                 catch { }
                 return false;
@@ -473,7 +473,7 @@ namespace INDI
             {
                 try
                 {
-                    return GetNumber("CCD_COOLER_POWER", "CCD_COOLER_VALUE").value;
+                    return GetNumber("CCD_COOLER_POWER", "CCD_COOLER_VALUE").Value;
                 }
                 catch { }
                 return 0;
@@ -507,7 +507,7 @@ namespace INDI
             {
                 try
                 {
-                    return (Int16)GetNumber("CCD_BINNING", "HOR_BIN").value;
+                    return (Int16)GetNumber("CCD_BINNING", "HOR_BIN").Value;
                 }
                 catch
                 {
@@ -532,7 +532,7 @@ namespace INDI
             {
                 try
                 {
-                    return (Int16)GetNumber("CCD_BINNING", "VER_BIN").value;
+                    return (Int16)GetNumber("CCD_BINNING", "VER_BIN").Value;
                 }
                 catch
                 {
@@ -557,7 +557,7 @@ namespace INDI
             {
                 try
                 {
-                    return (Int16)GetNumber("CCD_BINNING", "HOR_BIN").max;
+                    return (Int16)GetNumber("CCD_BINNING", "HOR_BIN").Max;
                 }
                 catch
                 {
@@ -572,7 +572,7 @@ namespace INDI
             {
                 try
                 {
-                    return (Int16)GetNumber("CCD_BINNING", "VER_BIN").max;
+                    return (Int16)GetNumber("CCD_BINNING", "VER_BIN").Max;
                 }
                 catch
                 {
@@ -587,7 +587,7 @@ namespace INDI
             {
                 try
                 {
-                    return (Int16)GetNumber("CCD_FRAME", "X").value;
+                    return (Int16)GetNumber("CCD_FRAME", "X").Value;
                 }
                 catch
                 {
@@ -612,7 +612,7 @@ namespace INDI
             {
                 try
                 {
-                    return (Int16)GetNumber("CCD_FRAME", "Y").value;
+                    return (Int16)GetNumber("CCD_FRAME", "Y").Value;
                 }
                 catch
                 {
@@ -637,7 +637,7 @@ namespace INDI
             {
                 try
                 {
-                    return (Int16)GetNumber("CCD_FRAME", "WIDTH").value;
+                    return (Int16)GetNumber("CCD_FRAME", "WIDTH").Value;
                 }
                 catch
                 {
@@ -662,7 +662,7 @@ namespace INDI
             {
                 try
                 {
-                    return (Int16)GetNumber("CCD_FRAME", "HEIGHT").value;
+                    return (Int16)GetNumber("CCD_FRAME", "HEIGHT").Value;
                 }
                 catch
                 {
@@ -687,7 +687,7 @@ namespace INDI
             {
                 try
                 {
-                    return (Int16)GetNumber("CCD_INFO", "CCD_MAX_X").value;
+                    return (Int16)GetNumber("CCD_INFO", "CCD_MAX_X").Value;
                 }
                 catch
                 {
@@ -702,7 +702,7 @@ namespace INDI
             {
                 try
                 {
-                    return (Int16)GetNumber("CCD_INFO", "CCD_MAX_Y").value;
+                    return (Int16)GetNumber("CCD_INFO", "CCD_MAX_Y").Value;
                 }
                 catch
                 {
@@ -717,7 +717,7 @@ namespace INDI
             {
                 try
                 {
-                    return GetNumber("CCD_EXPOSURE", "CCD_EXPOSURE_VALUE").min;
+                    return GetNumber("CCD_EXPOSURE", "CCD_EXPOSURE_VALUE").Min;
                 }
                 catch
                 {
@@ -732,7 +732,7 @@ namespace INDI
             {
                 try
                 {
-                    return GetNumber("CCD_EXPOSURE", "CCD_EXPOSURE_VALUE").max;
+                    return GetNumber("CCD_EXPOSURE", "CCD_EXPOSURE_VALUE").Max;
                 }
                 catch
                 {
@@ -747,7 +747,7 @@ namespace INDI
             {
                 try
                 {
-                    return GetNumber("CCD_EXPOSURE", "CCD_EXPOSURE_VALUE").step;
+                    return GetNumber("CCD_EXPOSURE", "CCD_EXPOSURE_VALUE").Step;
                 }
                 catch
                 {
@@ -777,7 +777,7 @@ namespace INDI
             {
                 try
                 {
-                    return GetNumber("CCD_INFO", "CCD_PIXEL_SIZE_X").value;
+                    return GetNumber("CCD_INFO", "CCD_PIXEL_SIZE_X").Value;
                 }
                 catch
                 {
@@ -792,7 +792,7 @@ namespace INDI
             {
                 try
                 {
-                    return GetNumber("CCD_INFO", "CCD_PIXEL_SIZE_Y").value;
+                    return GetNumber("CCD_INFO", "CCD_PIXEL_SIZE_Y").Value;
                 }
                 catch
                 {
@@ -807,7 +807,7 @@ namespace INDI
             {
                 try
                 {
-                    return GetNumber("CCD_TEMPERATURE", "CCD_TEMPERATURE_VALUE").value;
+                    return GetNumber("CCD_TEMPERATURE", "CCD_TEMPERATURE_VALUE").Value;
                 }
                 catch
                 {

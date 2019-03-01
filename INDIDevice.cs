@@ -63,31 +63,31 @@ namespace INDI
             Host.AddDevice(this);
             if (!client)
             {
-                AddSwitchVector(new ISwitchVector(Name, "CONNECTION", "Connection", "", "rw", "OneOfMany", new List<INDISwitch>
+                AddSwitchVector(new SwitchVector(Name, "CONNECTION", "Connection", "", "rw", "OneOfMany", new List<INDISwitch>
             {
                 new INDISwitch("CONNECT", "Connect", true),
                 new INDISwitch("DISCONNECT", "Disconnect", false)
             }));
-                AddTextVector(new ITextVector(Name, "DEVICE_PORT", "Connection port", "Connection", "ro", "", new List<INDIText>
+                AddTextVector(new TextVector(Name, "DEVICE_PORT", "Connection port", "Connection", "ro", "", new List<INDIText>
             {
                 new INDIText("PORT", "Connection port", "COM1")
             }));
-                AddNumberVector(new INumberVector(Name, "TIME_LST", "Local sidereal time", "Device Properties", "ro", "", new List<INDINumber>
+                AddNumberVector(new NumberVector(Name, "TIME_LST", "Local sidereal time", "Device Properties", "ro", "", new List<INDINumber>
             {
                 new INDINumber("LST", "Local sidereal time", "%16.0f", 0.0, 800000000.0, 0.0, 0.0)
             }));
-                AddTextVector(new ITextVector(Name, "TIME_UTC", "UTC Time & Offset", "Device Properties", "ro", "", new List<INDIText>
+                AddTextVector(new TextVector(Name, "TIME_UTC", "UTC Time & Offset", "Device Properties", "ro", "", new List<INDIText>
             {
                 new INDIText("UTC", "UTC time", "0"),
                 new INDIText("OFFSET", "UTC offset", "0")
             }));
-                AddNumberVector(new INumberVector(Name, "GEOGRAPHIC_COORD", "Earth geodetic coordinate", "Device Properties", "ro", "", new List<INDINumber>
+                AddNumberVector(new NumberVector(Name, "GEOGRAPHIC_COORD", "Earth geodetic coordinate", "Device Properties", "ro", "", new List<INDINumber>
             {
                 new INDINumber("LAT", "Site latitude", "%2.3f", -90.0, 90.0, 0.0, 0.0),
                 new INDINumber("LONG", "Site longitude", "%2.3f", 0.0, 360.0, 0.0, 0.0),
                 new INDINumber("ELEV", "Site elevation", "%2.3f", 0.0, 360.0, 0.0, 0.0)
             }));
-                AddNumberVector(new INumberVector(Name, "ATMOSPHERE", "Weather conditions", "Device Properties", "ro", "", new List<INDINumber>
+                AddNumberVector(new NumberVector(Name, "ATMOSPHERE", "Weather conditions", "Device Properties", "ro", "", new List<INDINumber>
             {
                 new INDINumber("TEMPERATURE", "Temperature (K)", "%3.3f", -273.0, 180.0, 0.0, 0.0),
                 new INDINumber("PRESSURE", "Pressure (hPa)", "%5.3f", 0.0, 400.0, 0.0, 0.0),
@@ -113,7 +113,7 @@ namespace INDI
             {
                 try
                 {
-                    return GetSwitch("CONNECTION", "CONNECT").value;
+                    return GetSwitch("CONNECTION", "CONNECT").Value;
                 }
                 catch
                 {
@@ -141,7 +141,7 @@ namespace INDI
             {
                 try
                 {
-                    return GetText("DEVICE_PORT", "PORT").value;
+                    return GetText("DEVICE_PORT", "PORT").Value;
                 }
                 catch
                 {
@@ -164,7 +164,7 @@ namespace INDI
             {
                 try
                 {
-                    return GetNumber("TIME_LST", "LST").value;
+                    return GetNumber("TIME_LST", "LST").Value;
                 }
                 catch
                 {
@@ -187,7 +187,7 @@ namespace INDI
             {
                 try
                 {
-                    return DateTime.Parse(GetText("TIME_UTC", "UTC").value);
+                    return DateTime.Parse(GetText("TIME_UTC", "UTC").Value);
                 }
                 catch
                 {
@@ -210,7 +210,7 @@ namespace INDI
             {
                 try
                 {
-                    return DateTime.Parse(GetText("TIME_UTC", "OFFSET").value);
+                    return DateTime.Parse(GetText("TIME_UTC", "OFFSET").Value);
                 }
                 catch
                 {
@@ -233,7 +233,7 @@ namespace INDI
             {
                 try
                 {
-                    return GetNumber("GEOGRAPHIC_COORD", "LAT").value;
+                    return GetNumber("GEOGRAPHIC_COORD", "LAT").Value;
                 }
                 catch
                 {
@@ -256,7 +256,7 @@ namespace INDI
             {
                 try
                 {
-                    return GetNumber("GEOGRAPHIC_COORD", "Int64").value;
+                    return GetNumber("GEOGRAPHIC_COORD", "Int64").Value;
                 }
                 catch
                 {
@@ -279,7 +279,7 @@ namespace INDI
             {
                 try
                 {
-                    return GetNumber("GEOGRAPHIC_COORD", "ELEV").value;
+                    return GetNumber("GEOGRAPHIC_COORD", "ELEV").Value;
                 }
                 catch
                 {
@@ -302,7 +302,7 @@ namespace INDI
             {
                 try
                 {
-                    return GetNumber("ATMOSPHERE", "TEMPERATURE").value;
+                    return GetNumber("ATMOSPHERE", "TEMPERATURE").Value;
                 }
                 catch
                 {
@@ -325,7 +325,7 @@ namespace INDI
             {
                 try
                 {
-                    return GetNumber("ATMOSPHERE", "PRESSURE").value;
+                    return GetNumber("ATMOSPHERE", "PRESSURE").Value;
                 }
                 catch
                 {
@@ -348,7 +348,7 @@ namespace INDI
             {
                 try
                 {
-                    return GetNumber("ATMOSPHERE", "HUMIDITY").value;
+                    return GetNumber("ATMOSPHERE", "HUMIDITY").Value;
                 }
                 catch
                 {
@@ -394,7 +394,7 @@ namespace INDI
             {
                 try
                 {
-                    return GetText("UPLOAD_SETTINGS", "UPLOAD_DIR").value;
+                    return GetText("UPLOAD_SETTINGS", "UPLOAD_DIR").Value;
                 }
                 catch
                 {
@@ -417,7 +417,7 @@ namespace INDI
             {
                 try
                 {
-                    return GetText("UPLOAD_SETTINGS", "UPLOAD_PREFIX").value;
+                    return GetText("UPLOAD_SETTINGS", "UPLOAD_PREFIX").Value;
                 }
                 catch
                 {
@@ -440,7 +440,7 @@ namespace INDI
             {
                 try
                 {
-                    return GetText("ACTIVE_DEVICES", "ACTIVE_TELESCOPE").value;
+                    return GetText("ACTIVE_DEVICES", "ACTIVE_TELESCOPE").Value;
                 }
                 catch
                 {
@@ -463,7 +463,7 @@ namespace INDI
             {
                 try
                 {
-                    return GetText("ACTIVE_DEVICES", "ACTIVE_CCD").value;
+                    return GetText("ACTIVE_DEVICES", "ACTIVE_CCD").Value;
                 }
                 catch
                 {
@@ -486,7 +486,7 @@ namespace INDI
             {
                 try
                 {
-                    return GetText("ACTIVE_DEVICES", "ACTIVE_FILTER").value;
+                    return GetText("ACTIVE_DEVICES", "ACTIVE_FILTER").Value;
                 }
                 catch
                 {
@@ -509,7 +509,7 @@ namespace INDI
             {
                 try
                 {
-                    return GetText("ACTIVE_DEVICES", "ACTIVE_FOCUSER").value;
+                    return GetText("ACTIVE_DEVICES", "ACTIVE_FOCUSER").Value;
                 }
                 catch
                 {
@@ -532,7 +532,7 @@ namespace INDI
             {
                 try
                 {
-                    return GetText("ACTIVE_DEVICES", "ACTIVE_DOME").value;
+                    return GetText("ACTIVE_DEVICES", "ACTIVE_DOME").Value;
                 }
                 catch
                 {
@@ -555,7 +555,7 @@ namespace INDI
             {
                 try
                 {
-                    return GetText("ACTIVE_DEVICES", "ACTIVE_GPS").value;
+                    return GetText("ACTIVE_DEVICES", "ACTIVE_GPS").Value;
                 }
                 catch
                 {
@@ -578,7 +578,7 @@ namespace INDI
             {
                 try
                 {
-                    return GetText("DRIVER_INFO", "DRIVER_VERSION").value;
+                    return GetText("DRIVER_INFO", "DRIVER_VERSION").Value;
                 }
                 catch
                 {
@@ -601,7 +601,7 @@ namespace INDI
             {
                 try
                 {
-                    return GetText("DRIVER_INFO", "DRIVER_NAME").value;
+                    return GetText("DRIVER_INFO", "DRIVER_NAME").Value;
                 }
                 catch
                 {
@@ -624,7 +624,7 @@ namespace INDI
             {
                 try
                 {
-                    return GetText("DRIVER_INFO", "DRIVER_EXEC").value;
+                    return GetText("DRIVER_INFO", "DRIVER_EXEC").Value;
                 }
                 catch
                 {
@@ -648,7 +648,7 @@ namespace INDI
                 try
                 {
                     DRIVER_INTERFACE intf = DRIVER_INTERFACE.GENERAL_INTERFACE;
-                    if(!Enum.TryParse(GetText("DRIVER_INFO", "DRIVER_INTERFACE").value, out intf))
+                    if(!Enum.TryParse(GetText("DRIVER_INFO", "DRIVER_INTERFACE").Value, out intf))
                         return DRIVER_INTERFACE.GENERAL_INTERFACE;
                     return intf;
                 }

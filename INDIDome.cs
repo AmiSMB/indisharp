@@ -26,7 +26,7 @@ namespace INDI
     {
         public INDIDomeNumberType Type;
         public List<INDINumber> Values;
-        public INDIDomeNumberEventArgs(INumberVector vector, string dev) : base(vector, dev)
+        public INDIDomeNumberEventArgs(NumberVector vector, string dev) : base(vector, dev)
         {
             Values = vector.Values;
             switch (vector.Name)
@@ -69,7 +69,7 @@ namespace INDI
     {
         public INDIDomeSwitchType Type;
         public List<INDISwitch> Values;
-        public INDIDomeSwitchEventArgs(ISwitchVector vector, string dev) : base(vector, dev)
+        public INDIDomeSwitchEventArgs(SwitchVector vector, string dev) : base(vector, dev)
         {
             Values = vector.Values;
             switch (vector.Name)
@@ -106,7 +106,7 @@ namespace INDI
     {
         public INDIDomeTextType Type;
         public List<INDIText> Values;
-        public INDIDomeTextEventArgs(ITextVector vector, string dev) : base(vector, dev)
+        public INDIDomeTextEventArgs(TextVector vector, string dev) : base(vector, dev)
         {
             Values = vector.Values;
             switch (vector.Name)
@@ -194,53 +194,53 @@ namespace INDI
         {
             if (!client)
             {
-                AddNumberVector(new INumberVector(Name, "DOME_SPEED", "Dome speed", "Motion Control", "rw", "", new List<INDINumber>
+                AddNumberVector(new NumberVector(Name, "DOME_SPEED", "Dome speed", "Motion Control", "rw", "", new List<INDINumber>
             {
                 new INDINumber("DOME_SPEED_VALUE", "Dome speed in RPM", "%3.1f", 0.00, 180.0, 0.1, 0.0)
             }));
-                AddSwitchVector(new ISwitchVector(Name, "DOME_MOTION", "Move dome", "Motion Control", "rw", "OneOfMany", new List<INDISwitch>
+                AddSwitchVector(new SwitchVector(Name, "DOME_MOTION", "Move dome", "Motion Control", "rw", "OneOfMany", new List<INDISwitch>
             {
                 new INDISwitch("DOME_CW", "Move dome Clockwise", true),
                 new INDISwitch("DOME_CCW", "Move dome counter clockwise", false)
             }));
-                AddNumberVector(new INumberVector(Name, "DOME_TIMER", "Dome speed", "Motion Control", "rw", "", new List<INDINumber>
+                AddNumberVector(new NumberVector(Name, "DOME_TIMER", "Dome speed", "Motion Control", "rw", "", new List<INDINumber>
             {
                 new INDINumber("DOME_TIMER_VALUE", "Move the dome for n milliseconds", "%5.0f", 0.00, 60000.0, 1.0, 0.0)
             }));
-                AddNumberVector(new INumberVector(Name, "REL_DOME_POSITION", "Dome Relative position", "Motion Control", "rw", "", new List<INDINumber>
+                AddNumberVector(new NumberVector(Name, "REL_DOME_POSITION", "Dome Relative position", "Motion Control", "rw", "", new List<INDINumber>
             {
                 new INDINumber("DOME_RELATIVE_POSITION", "Move n degrees azimuth in the direction selected", "%3.4f", 0.00, 180.0, 0.0001, 0.0)
             }));
-                AddNumberVector(new INumberVector(Name, "ABS_DOME_POSITION", "Dome Absolute position", "Motion Control", "rw", "", new List<INDINumber>
+                AddNumberVector(new NumberVector(Name, "ABS_DOME_POSITION", "Dome Absolute position", "Motion Control", "rw", "", new List<INDINumber>
             {
                 new INDINumber("DOME_ABSOLUTE_POSITION", "Move dome to n absolute azimuth angle in degrees", "%3.4f", 0.00, 180.0, 0.0001, 0.0)
             }));
-                AddSwitchVector(new ISwitchVector(Name, "DOME_ABORT_MOTION", "Abort dome motion", "Motion Control", "rw", "AtMostOne", new List<INDISwitch>
+                AddSwitchVector(new SwitchVector(Name, "DOME_ABORT_MOTION", "Abort dome motion", "Motion Control", "rw", "AtMostOne", new List<INDISwitch>
             {
                 new INDISwitch("ABORT", "Abort dome motion", false)
             }));
-                AddSwitchVector(new ISwitchVector(Name, "DOME_SHUTTER", "Open/Close dome shutter", "Main Control", "rw", "OneOfMany", new List<INDISwitch>
+                AddSwitchVector(new SwitchVector(Name, "DOME_SHUTTER", "Open/Close dome shutter", "Main Control", "rw", "OneOfMany", new List<INDISwitch>
             {
                 new INDISwitch("SHUTTER_OPEN", "Open dome shutter", false),
                 new INDISwitch("SHUTTER_CLOSE", "Close dome shutter", true)
             }));
-                AddSwitchVector(new ISwitchVector(Name, "DOME_GOTO", "", "Main Control", "rw", "AtMostOne", new List<INDISwitch>
+                AddSwitchVector(new SwitchVector(Name, "DOME_GOTO", "", "Main Control", "rw", "AtMostOne", new List<INDISwitch>
             {
                 new INDISwitch("DOME_HOME", "Go to home position", false),
                 new INDISwitch("DOME_PARK", "Go to park position", true)
             }));
-                AddNumberVector(new INumberVector(Name, "DOME_PARAMS", "Dome speed", "Main Control", "rw", "", new List<INDINumber>
+                AddNumberVector(new NumberVector(Name, "DOME_PARAMS", "Dome speed", "Main Control", "rw", "", new List<INDINumber>
             {
                 new INDINumber("HOME_POSITION", "Dome home absolute position", "%3.1f", 0.00, 180.0, 0.1, 0.0),
                 new INDINumber("PARK_POSITION", "Dome parking absolute position", "%3.1f", 0.00, 180.0, 0.1, 0.0),
                 new INDINumber("AUTOSYNC_THRESHOLD", "Slaved dome autosync threshold", "%3.1f", 0.00, 180.0, 0.1, 0.0)
             }));
-                AddSwitchVector(new ISwitchVector(Name, "DOME_AUTOSYNC", "Enable/Disable dome slaving", "Main Control", "rw", "OneOfMany", new List<INDISwitch>
+                AddSwitchVector(new SwitchVector(Name, "DOME_AUTOSYNC", "Enable/Disable dome slaving", "Main Control", "rw", "OneOfMany", new List<INDISwitch>
             {
                 new INDISwitch("DOME_AUTOSYNC_ENABLE", "Enable dome slaving", false),
                 new INDISwitch("DOME_AUTOSYNC_DISABLE", "Disable dome slaving", true)
             }));
-                AddNumberVector(new INumberVector(Name, "DOME_MEASUREMENTS", "Dome informtations", "Dome Info", "rw", "", new List<INDINumber>
+                AddNumberVector(new NumberVector(Name, "DOME_MEASUREMENTS", "Dome informtations", "Dome Info", "rw", "", new List<INDINumber>
             {
                 new INDINumber("DM_DOME_RADIUS", "Dome radius (m)", "%3.3f", 0.00, 50.0, 0.001, 0.0),
                 new INDINumber("DOME_SHUTTER_WIDTH", "Dome shutter width (m)", "%3.3f", 0.00, 50.0, 0.001, 0.0),
@@ -351,7 +351,7 @@ namespace INDI
             {
                 try
                 {
-                    return GetNumber("DOME_SPEED", "DOME_SPEED_VALUE").value;
+                    return GetNumber("DOME_SPEED", "DOME_SPEED_VALUE").Value;
                 }
                 catch { }
                 return 0;
@@ -372,7 +372,7 @@ namespace INDI
             {
                 try
                 {
-                    return GetNumber("REL_DOME_POSITION", "DOME_RELATIVE_POSITION").value;
+                    return GetNumber("REL_DOME_POSITION", "DOME_RELATIVE_POSITION").Value;
                 }
                 catch { }
                 return 0;
@@ -393,7 +393,7 @@ namespace INDI
             {
                 try
                 {
-                    return GetNumber("ABS_DOME_POSITION", "DOME_ABSOLUTE_POSITION").value;
+                    return GetNumber("ABS_DOME_POSITION", "DOME_ABSOLUTE_POSITION").Value;
                 }
                 catch { }
                 return 0;
@@ -414,7 +414,7 @@ namespace INDI
             {
                 try
                 {
-                    return GetNumber("DOME_PARAMS", "HOME_POSITION").value;
+                    return GetNumber("DOME_PARAMS", "HOME_POSITION").Value;
                 }
                 catch { }
                 return 0;
@@ -435,7 +435,7 @@ namespace INDI
             {
                 try
                 {
-                    return GetNumber("DOME_PARAMS", "PARK_POSITION").value;
+                    return GetNumber("DOME_PARAMS", "PARK_POSITION").Value;
                 }
                 catch { }
                 return 0;
@@ -456,7 +456,7 @@ namespace INDI
             {
                 try
                 {
-                    return GetNumber("DOME_PARAMS", "AUTOSYNC_THRESHOLD").value;
+                    return GetNumber("DOME_PARAMS", "AUTOSYNC_THRESHOLD").Value;
                 }
                 catch { }
                 return 0;
@@ -477,7 +477,7 @@ namespace INDI
             {
                 try
                 {
-                    return GetSwitch("DOME_AUTOSYNC", "DOME_AUTOSYNC_ENABLE").value;
+                    return GetSwitch("DOME_AUTOSYNC", "DOME_AUTOSYNC_ENABLE").Value;
                 }
                 catch
                 {
@@ -502,7 +502,7 @@ namespace INDI
             {
                 try
                 {
-                    return GetNumber("DOME_MEASUREMENTS", "DM_DOME_RADIUS").value;
+                    return GetNumber("DOME_MEASUREMENTS", "DM_DOME_RADIUS").Value;
                 }
                 catch { }
                 return 0;
@@ -523,7 +523,7 @@ namespace INDI
             {
                 try
                 {
-                    return GetNumber("DOME_MEASUREMENTS", "DOME_SHUTTER_WIDTH").value;
+                    return GetNumber("DOME_MEASUREMENTS", "DOME_SHUTTER_WIDTH").Value;
                 }
                 catch { }
                 return 0;
@@ -544,7 +544,7 @@ namespace INDI
             {
                 try
                 {
-                    return GetNumber("DOME_MEASUREMENTS", "DM_NORTH_DISPLACEMENT").value;
+                    return GetNumber("DOME_MEASUREMENTS", "DM_NORTH_DISPLACEMENT").Value;
                 }
                 catch { }
                 return 0;
@@ -565,7 +565,7 @@ namespace INDI
             {
                 try
                 {
-                    return GetNumber("DOME_MEASUREMENTS", "DM_EAST_DISPLACEMENT").value;
+                    return GetNumber("DOME_MEASUREMENTS", "DM_EAST_DISPLACEMENT").Value;
                 }
                 catch { }
                 return 0;
@@ -586,7 +586,7 @@ namespace INDI
             {
                 try
                 {
-                    return GetNumber("DOME_MEASUREMENTS", "DM_UP_DISPLACEMENT").value;
+                    return GetNumber("DOME_MEASUREMENTS", "DM_UP_DISPLACEMENT").Value;
                 }
                 catch { }
                 return 0;
@@ -607,7 +607,7 @@ namespace INDI
             {
                 try
                 {
-                    return GetNumber("DOME_MEASUREMENTS", "DM_OTA_OFFSET").value;
+                    return GetNumber("DOME_MEASUREMENTS", "DM_OTA_OFFSET").Value;
                 }
                 catch { }
                 return 0;

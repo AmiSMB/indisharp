@@ -26,7 +26,7 @@ namespace INDI
     {
         public INDIFilterWheelNumberType Type;
         public List<INDINumber> Values;
-        public INDIFilterWheelNumberEventArgs(INumberVector vector, string dev) : base(vector, dev)
+        public INDIFilterWheelNumberEventArgs(NumberVector vector, string dev) : base(vector, dev)
         {
             Values = vector.Values;
             switch (vector.Name)
@@ -54,7 +54,7 @@ namespace INDI
     {
         public INDIFilterWheelSwitchType Type;
         public List<INDISwitch> Values;
-        public INDIFilterWheelSwitchEventArgs(ISwitchVector vector, string dev) : base(vector, dev)
+        public INDIFilterWheelSwitchEventArgs(SwitchVector vector, string dev) : base(vector, dev)
         {
             Values = vector.Values;
             switch (vector.Name)
@@ -76,7 +76,7 @@ namespace INDI
     {
         public INDIFilterWheelTextType Type;
         public List<INDIText> Values;
-        public INDIFilterWheelTextEventArgs(ITextVector vector, string dev) : base(vector, dev)
+        public INDIFilterWheelTextEventArgs(TextVector vector, string dev) : base(vector, dev)
         {
             Values = vector.Values;
             switch (vector.Name)
@@ -142,11 +142,11 @@ namespace INDI
         {
             if (!client)
             {
-                AddNumberVector(new INumberVector(Name, "FILTER_SLOT", "The filter wheel's current slot number", "Main Control", "rw", "", new List<INDINumber>
+                AddNumberVector(new NumberVector(Name, "FILTER_SLOT", "The filter wheel's current slot number", "Main Control", "rw", "", new List<INDINumber>
             {
                 new INDINumber("FILTER_SLOT_VALUE", "Slot number", "%2.0f", 0.00, 99.0, 1.0, 0.0)
             }));
-                AddTextVector(new ITextVector(Name, "FILTER_NAME_VALUE", "The filter wheel's current slot name", "Main Control", "ro", "", new List<INDIText>
+                AddTextVector(new TextVector(Name, "FILTER_NAME_VALUE", "The filter wheel's current slot name", "Main Control", "ro", "", new List<INDIText>
             {
                 new INDIText("FILTER_NAME", "Slot name", "LIGHT")
             }));
@@ -232,7 +232,7 @@ namespace INDI
             {
                 try
                 {
-                    return (Int32)GetNumber("FILTER_SLOT", "FILTER_SLOT_VALUE").value;
+                    return (Int32)GetNumber("FILTER_SLOT", "FILTER_SLOT_VALUE").Value;
                 }
                 catch
                 {
@@ -262,7 +262,7 @@ namespace INDI
 				{
 					List<string> ret = new List<string>();
 					foreach(INDIText text in GetTextVector("FILTER_NAME").Values)
-						ret.Add(text.value);
+						ret.Add(text.Value);
 					return ret.ToArray();
 				}
 				catch
@@ -293,7 +293,7 @@ namespace INDI
 			{
 				try
 				{
-					return GetText("FILTER_NAME", "FILTER_SLOT_NAME_" + FilterSlot).value;
+					return GetText("FILTER_NAME", "FILTER_SLOT_NAME_" + FilterSlot).Value;
 				}
 				catch
 				{

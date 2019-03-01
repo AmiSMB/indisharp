@@ -60,9 +60,9 @@ namespace INDI
 
     public class IsNewTextEventArgs : EventArgs
     {
-        public ITextVector Vector;
+        public TextVector Vector;
         public string Device;
-        public IsNewTextEventArgs(ITextVector vector, string dev)
+        public IsNewTextEventArgs(TextVector vector, string dev)
         {
             Vector = vector;
             Device = dev;
@@ -71,9 +71,9 @@ namespace INDI
 
     public class IsNewNumberEventArgs : EventArgs
     {
-        public INumberVector Vector;
+        public NumberVector Vector;
         public string Device;
-        public IsNewNumberEventArgs(INumberVector vector, string dev)
+        public IsNewNumberEventArgs(NumberVector vector, string dev)
         {
             Vector = vector;
             Device = dev;
@@ -82,9 +82,9 @@ namespace INDI
 
     public class IsNewSwitchEventArgs : EventArgs
     {
-        public ISwitchVector Vector;
+        public SwitchVector Vector;
         public string Device;
-        public IsNewSwitchEventArgs(ISwitchVector vector, string dev)
+        public IsNewSwitchEventArgs(SwitchVector vector, string dev)
         {
             Vector = vector;
             Device = dev;
@@ -93,9 +93,9 @@ namespace INDI
 
     public class IsNewBlobEventArgs : EventArgs
     {
-        public IBlobVector Vector;
+        public BlobVector Vector;
         public string Device;
-        public IsNewBlobEventArgs(IBlobVector vector, string dev)
+        public IsNewBlobEventArgs(BlobVector vector, string dev)
         {
             Vector = vector;
             Device = dev;
@@ -421,13 +421,13 @@ namespace INDI
 			string minimum = "";
 			string maximum = "";
 			string step = "";
-			IBlobVector blobvector = new IBlobVector ("", "", "", "", "", "", null);
+			BlobVector blobvector = new BlobVector ("", "", "", "", "", "", null);
 			List<INDIBlob> blobs = new List<INDIBlob> ();
-			ISwitchVector switchvector = new ISwitchVector ("", "", "", "", "", "", null);
+			SwitchVector switchvector = new SwitchVector ("", "", "", "", "", "", null);
 			List<INDISwitch> switches = new List<INDISwitch> ();
-			INumberVector numbervector = new INumberVector ("", "", "", "", "", "", null);
+			NumberVector numbervector = new NumberVector ("", "", "", "", "", "", null);
 			List<INDINumber> numbers = new List<INDINumber> ();
-			ITextVector textvector = new ITextVector ("", "", "", "", "", "", null);
+			TextVector textvector = new TextVector ("", "", "", "", "", "", null);
 			List<INDIText> texts = new List<INDIText> ();
 			try {
 				XmlReaderSettings settings = new XmlReaderSettings ();
@@ -483,28 +483,28 @@ namespace INDI
 									blobs = new List<INDIBlob> ();
 									blobvector = GetDevice (device).GetBlobVector (vectorname);
 									if (blobvector == null)
-										blobvector = new IBlobVector (device, vectorname, vectorlabel, group, permission, rule, blobs);
+										blobvector = new BlobVector (device, vectorname, vectorlabel, group, permission, rule, blobs);
 									blobvector.Values = blobs;
 								}
 								if (target.Contains ("switch")) {
 									switches = new List<INDISwitch> ();
 									switchvector = GetDevice (device).GetSwitchVector (vectorname);
 									if (switchvector == null)
-										switchvector = new ISwitchVector (device, vectorname, vectorlabel, group, permission, rule, switches);
+										switchvector = new SwitchVector (device, vectorname, vectorlabel, group, permission, rule, switches);
 									switchvector.Values = switches;
 								}
 								if (target.Contains ("number")) {
 									numbers = new List<INDINumber> ();
 									numbervector = GetDevice (device).GetNumberVector (vectorname);
 									if (numbervector == null)
-										numbervector = new INumberVector (device, vectorname, vectorlabel, group, permission, rule, numbers);
+										numbervector = new NumberVector (device, vectorname, vectorlabel, group, permission, rule, numbers);
 									numbervector.Values = numbers;
 								}
 								if (target.Contains ("text")) {
 									texts = new List<INDIText> ();
 									textvector = GetDevice (device).GetTextVector (vectorname);
 									if (textvector == null)
-										textvector = new ITextVector (device, vectorname, vectorlabel, group, permission, rule, texts);
+										textvector = new TextVector (device, vectorname, vectorlabel, group, permission, rule, texts);
 									textvector.Values = texts;
 								}
 							} else {

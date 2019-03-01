@@ -335,7 +335,7 @@ namespace INDI.Forms
                                             t.Text = n.Label;
                                             t.Name = "SWITCH_" + n.Name;
                                             t.Enabled = (e.Vector.Permission != "ro");
-                                            t.Checked = n.value;
+                                            t.Checked = n.Value;
                                             t.Location = new Point(30, y);
                                             t.CheckedChanged += valueChanged;
                                             y += 26;
@@ -349,7 +349,7 @@ namespace INDI.Forms
                                             t.Text = n.Label;
                                             t.Name = "SELECT_" + n.Name;
                                             t.Enabled = (e.Vector.Permission != "ro");
-                                            t.Checked = n.value;
+                                            t.Checked = n.Value;
                                             t.Location = new Point(30, y);
                                             t.CheckedChanged += valueChanged;
                                             y += 26;
@@ -362,13 +362,13 @@ namespace INDI.Forms
                                         if (ChildPresent(vector, "SWITCH_" + n.Name))
                                         {
                                             ((CheckBox)vector.Controls.Find("SWITCH_" + n.Name, false)[0]).CheckedChanged -= valueChanged;
-                                            ((CheckBox)vector.Controls.Find("SWITCH_" + n.Name, false)[0]).Checked = n.value;
+                                            ((CheckBox)vector.Controls.Find("SWITCH_" + n.Name, false)[0]).Checked = n.Value;
                                             ((CheckBox)vector.Controls.Find("SWITCH_" + n.Name, false)[0]).CheckedChanged += valueChanged;
                                         }
                                         if (ChildPresent(vector, "SELECT_" + n.Name))
                                         {
                                             ((RadioButton)vector.Controls.Find("SELECT_" + n.Name, false)[0]).CheckedChanged -= valueChanged;
-                                            ((RadioButton)vector.Controls.Find("SELECT_" + n.Name, false)[0]).Checked = n.value;
+                                            ((RadioButton)vector.Controls.Find("SELECT_" + n.Name, false)[0]).Checked = n.Value;
                                             ((RadioButton)vector.Controls.Find("SELECT_" + n.Name, false)[0]).CheckedChanged += valueChanged;
                                         }
                                     }
@@ -431,7 +431,7 @@ namespace INDI.Forms
                                         l.Text = n.Label;
                                         TextBox t = new TextBox();
                                         t.BorderStyle = BorderStyle.FixedSingle;
-                                        t.Text = n.value.ToString();
+                                        t.Text = n.Value.ToString();
                                         t.Name = "NUMBER_" + n.Name;
                                         t.Enabled = (e.Vector.Permission != "ro");
                                         l.Location = new Point(30, y);
@@ -447,11 +447,11 @@ namespace INDI.Forms
                                     foreach (INDINumber n in e.Vector.Values)
                                     {
                                         vector.Controls.Find("NUMBER_" + n.Name, false)[0].TextChanged -= valueChanged;
-                                        string text = n.value.ToString();
+                                        string text = n.Value.ToString();
                                         if (e.Vector.Name == "TIME_LST" || (e.Vector.Name.Contains("COORD") && n.Name == "RA"))
-                                            text = (Math.Floor(n.value) % 24).ToString() + ":" + (Math.Floor(n.value * 60) % 60).ToString() + ":" + (Math.Floor(n.value * 3600) % 60).ToString();
+                                            text = (Math.Floor(n.Value) % 24).ToString() + ":" + (Math.Floor(n.Value * 60) % 60).ToString() + ":" + (Math.Floor(n.Value * 3600) % 60).ToString();
                                         if (e.Vector.Name.Contains("COORD") && (n.Name == "DEC" || n.Name == "ALT" || n.Name == "AZ"))
-                                            text = (Math.Floor(n.value) % 360).ToString() + ":" + (Math.Abs(Math.Floor(n.value * 60)) % 60).ToString() + ":" + (Math.Abs(Math.Floor(n.value * 3600)) % 60).ToString();
+                                            text = (Math.Floor(n.Value) % 360).ToString() + ":" + (Math.Abs(Math.Floor(n.Value * 60)) % 60).ToString() + ":" + (Math.Abs(Math.Floor(n.Value * 3600)) % 60).ToString();
                                         vector.Controls.Find("NUMBER_" + n.Name, false)[0].Text = text;
                                         vector.Controls.Find("NUMBER_" + n.Name, false)[0].TextChanged += valueChanged;
                                     }
@@ -514,7 +514,7 @@ namespace INDI.Forms
                                         l.Text = n.Label;
                                         TextBox t = new TextBox();
                                         t.BorderStyle = BorderStyle.FixedSingle;
-                                        t.Text = n.value;
+                                        t.Text = n.Value;
                                         t.Name = "TEXT_" + n.Name;
                                         t.Enabled = (e.Vector.Permission != "ro");
                                         l.Location = new Point(30, y);
@@ -528,7 +528,7 @@ namespace INDI.Forms
                                     foreach (INDIText n in e.Vector.Values)
                                     {
                                         vector.Controls.Find("TEXT_" + n.Name, false)[0].TextChanged -= valueChanged;
-                                        vector.Controls.Find("TEXT_" + n.Name, false)[0].Text = n.value;
+                                        vector.Controls.Find("TEXT_" + n.Name, false)[0].Text = n.Value;
                                         vector.Controls.Find("TEXT_" + n.Name, false)[0].TextChanged += valueChanged;
                                     }
                                 }
