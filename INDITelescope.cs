@@ -220,9 +220,9 @@ namespace INDI
     #endregion
     public class INDITelescope : INDIDevice
     {
-        public event EventHandler<INDITelescopeNumberEventArgs> IsNewNumber = null;
-        public event EventHandler<INDITelescopeSwitchEventArgs> IsNewSwitch = null;
-        public event EventHandler<INDITelescopeTextEventArgs> IsNewText = null;
+        public event EventHandler<INDITelescopeNumberEventArgs> IsNewNumber;
+        public event EventHandler<INDITelescopeSwitchEventArgs> IsNewSwitch;
+        public event EventHandler<INDITelescopeTextEventArgs> IsNewText;
         #region Constructors / Initialization
         public INDITelescope(string name, INDIClient host, bool client = true)
             : base(name, host, client)

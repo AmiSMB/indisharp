@@ -133,9 +133,9 @@ namespace INDI
     #endregion
     public class INDIFilterWheel : INDIDevice
     {
-        public event EventHandler<INDIFilterWheelNumberEventArgs> IsNewNumber = null;
-        public event EventHandler<INDIFilterWheelSwitchEventArgs> IsNewSwitch = null;
-        public event EventHandler<INDIFilterWheelTextEventArgs> IsNewText = null;
+        public event EventHandler<INDIFilterWheelNumberEventArgs> IsNewNumber;
+        public event EventHandler<INDIFilterWheelSwitchEventArgs> IsNewSwitch;
+        public event EventHandler<INDIFilterWheelTextEventArgs> IsNewText;
         #region Constructors / Initialization
         public INDIFilterWheel(string name, INDIClient host, bool client = true)
             : base(name, host, client)

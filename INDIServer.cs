@@ -15,12 +15,10 @@
 */
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
-using System.Text.RegularExpressions;
 using System.Globalization;
 
 namespace INDI
@@ -43,7 +41,7 @@ namespace INDI
         TcpListener server;
         Thread listenThread;
         bool ThreadsRunning = true;
-        string Address = "127.0.0.1:7624";
+        string Address;
         bool active;
         public bool Active
         {
@@ -168,11 +166,11 @@ namespace INDI
                     TcpClient client = server.AcceptTcpClient();
                     if (client.Connected)
                     {
-                        Thread ReadThread = new Thread(new ParameterizedThreadStart(_readThread));
+                        Thread ReadThread = new Thread(_readThread);
                         ReadThread.IsBackground = true;
                         ReadThread.Name = "INDISharp Server read thread";
                         ReadThread.Start(client);
-                        Thread WriteThread = new Thread(new ParameterizedThreadStart(_writeThread));
+                        Thread WriteThread = new Thread(_writeThread);
                         WriteThread.IsBackground = true;
                         WriteThread.Name = "INDISharp Server write thread";
                         WriteThread.Start(client);
@@ -191,7 +189,6 @@ namespace INDI
         {
             Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
             Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
-            byte[] m = new byte[1];
             string message = "";
             TcpClient c = (TcpClient)client;
             NetworkStream s = c.GetStream();
@@ -203,7 +200,7 @@ namespace INDI
                         message += d.OutputString;
                     if (message.Length > 0)
                     {
-                        m = Encoding.UTF8.GetBytes(message);
+                        var m = Encoding.UTF8.GetBytes(message);
                         s.Write(m, 0, m.Length);
                         message = "";
                     }
@@ -219,7 +216,6 @@ namespace INDI
         {
             Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
             Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
-            string message = "";
             TcpClient c = (TcpClient)client;
             NetworkStream s = c.GetStream();
             while (ThreadsRunning && c.Connected)
@@ -230,7 +226,7 @@ namespace INDI
                     int bytesRead = s.Read(m, 0, BufferSize);
                     if (bytesRead > 0)
                     {
-                        message = Encoding.UTF8.GetString(m, 0, bytesRead);
+                        var message = Encoding.UTF8.GetString(m, 0, bytesRead);
                         foreach (INDIClient d in Drivers)
                             d.InputString = message;
                     }

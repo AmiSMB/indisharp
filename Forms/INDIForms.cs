@@ -15,10 +15,10 @@
 */
 
 using System;
-using System.Windows.Forms;
 using System.Drawing;
-using System.Threading;
 using System.Globalization;
+using System.Threading;
+using System.Windows.Forms;
 
 namespace INDI.Forms
 {
@@ -114,8 +114,8 @@ namespace INDI.Forms
                 Close();
             };
             Controls.Add(b);
-            this.ClientSize = new Size(200, y);
-            this.FormBorderStyle = FormBorderStyle.FixedToolWindow;
+            ClientSize = new Size(200, y);
+            FormBorderStyle = FormBorderStyle.FixedToolWindow;
         }
 
         void Indi_DeviceAdded(object sender, DeviceAddedEventArgs e)
@@ -124,7 +124,7 @@ namespace INDI.Forms
             {
                 if (IsHandleCreated)
                 {
-                    this.Invoke((MethodInvoker)delegate
+                    Invoke((MethodInvoker)delegate
                     {
                         Device.Items.Add(e.Device.Name);
                         Device.SelectedIndex = 0;
@@ -151,7 +151,7 @@ namespace INDI.Forms
         {
             Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
             Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
-            this.FormClosing += _FormClosing;
+            FormClosing += _FormClosing;
             server = host;
             Device = device;
             Connect();
@@ -170,18 +170,18 @@ namespace INDI.Forms
                     server.IsDelProperty += IsDelProperty;
                     server.QueryProperties();
                     DevicesConnected.Size = new Size(495, 395);
-                    this.Controls.Clear();
-                    this.Controls.Add(DevicesConnected);
-                    this.ClientSize = new Size(500, 400);
-                    this.FormBorderStyle = FormBorderStyle.FixedToolWindow;
+                    Controls.Clear();
+                    Controls.Add(DevicesConnected);
+                    ClientSize = new Size(500, 400);
+                    FormBorderStyle = FormBorderStyle.FixedToolWindow;
                 }
             }
         }
 
         void _FormClosing(object sender, EventArgs e)
         {
-            this.FormClosing -= _FormClosing;
-            this.Controls.Clear();
+            FormClosing -= _FormClosing;
+            Controls.Clear();
             if (server != null)
                 server.Dispose();
         }
@@ -274,7 +274,7 @@ namespace INDI.Forms
 
         void pan_ControlAdded(object sender, ControlEventArgs e)
         {
-            this.Invoke((MethodInvoker)delegate
+            Invoke((MethodInvoker)delegate
             {
                 Panel pan = (Panel)sender;
                 int height = 0;
@@ -295,7 +295,7 @@ namespace INDI.Forms
                 {
                     if (IsHandleCreated)
                     {
-                        this.Invoke((MethodInvoker)delegate
+                        Invoke((MethodInvoker)delegate
                         {
                             GroupBox vector = new GroupBox();
                             vector.FlatStyle = FlatStyle.Flat;
@@ -394,7 +394,7 @@ namespace INDI.Forms
                 {
                     if (IsHandleCreated)
                     {
-                        this.Invoke((MethodInvoker)delegate
+                        Invoke((MethodInvoker)delegate
                         {
                             GroupBox vector = new GroupBox();
                             vector.FlatStyle = FlatStyle.Flat;
@@ -477,7 +477,7 @@ namespace INDI.Forms
                 {
                     if (IsHandleCreated)
                     {
-                        this.Invoke((MethodInvoker)delegate
+                        Invoke((MethodInvoker)delegate
                         {
                             GroupBox vector = new GroupBox();
                             vector.FlatStyle = FlatStyle.Flat;
@@ -553,7 +553,7 @@ namespace INDI.Forms
                 {
                     if (IsHandleCreated)
                     {
-                        this.Invoke((MethodInvoker)delegate
+                        Invoke((MethodInvoker)delegate
                         {
                             Control device, property, group, tab;
                             if (ChildPresent(DevicesConnected, e.Device))
@@ -592,7 +592,7 @@ namespace INDI.Forms
                 }
                 if (type.StartsWith("SELECT_"))
                 {
-                    int index = 0;
+                    int index;
                     for (index = 0; index < ((Control)sender).Parent.Controls.Count; index++)
                     {
                         if (((RadioButton)((Control)sender).Parent.Controls[index]).Checked)
@@ -608,8 +608,7 @@ namespace INDI.Forms
                         string[] dt = ((TextBox)sender).Text.Split(":".ToCharArray());
                         if (dt.Length == 3)
                         {
-                            double v = 0;
-                            if (double.TryParse(dt[0], out v))
+                            if (double.TryParse(dt[0], out var v))
                                 val += v;
                             if (double.TryParse(dt[1], out v))
                                 val += v / 60;

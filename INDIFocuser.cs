@@ -153,9 +153,9 @@ namespace INDI
     #endregion
 	public class INDIFocuser : INDIDevice
     {
-        public event EventHandler<INDIFocuserNumberEventArgs> IsNewNumber = null;
-        public event EventHandler<INDIFocuserSwitchEventArgs> IsNewSwitch = null;
-        public event EventHandler<INDIFocuserTextEventArgs> IsNewText = null;
+        public event EventHandler<INDIFocuserNumberEventArgs> IsNewNumber;
+        public event EventHandler<INDIFocuserSwitchEventArgs> IsNewSwitch;
+        public event EventHandler<INDIFocuserTextEventArgs> IsNewText;
         #region Constructors / Initialization
         public INDIFocuser(string name, INDIClient host, bool client = true)
             : base(name, host, client)

@@ -60,7 +60,7 @@
     <Compile Include="INDIClient.cs" />
     <Compile Include="INDIBaseDevice.cs" />
     <Compile Include="INDIProperty.cs" />
-    <Compile Include="INDIForms.cs">
+    <Compile Include="Forms\INDIForms.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="INDITelescope.cs" />

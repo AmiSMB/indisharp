@@ -117,17 +117,14 @@ namespace INDI
                 }
                 catch
                 {
+                    return false;
                 }
-                return false;
             }
             set
             {
                 try
                 {
-                    if (value == true)
-                        SetSwitchVector("CONNECTION", 0);
-                    else
-                        SetSwitchVector("CONNECTION", 1);
+                    SetSwitchVector("CONNECTION", value ? 0 : 1);
                 }
                 catch
                 {
