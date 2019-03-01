@@ -134,16 +134,16 @@ namespace INDI
         Stream stream;
         Thread ReadThread;
         Thread SendThread;
-        Boolean ThreadsRunning;
+        bool ThreadsRunning;
         String _inputString = "";
         String _outputString = "";
         Queue inputString = new Queue();
         Queue outputString = new Queue();
-        Int32 _BufferSize = 0x1000000;
+        int _BufferSize = 0x1000000;
         int _CommandSize = 0x10;
         #endregion
         #region Public Properties
-        public Int32 BufferSize
+        public int BufferSize
         {
             get
             {
@@ -154,7 +154,7 @@ namespace INDI
                 _BufferSize = value;
             }
         }
-        public Int32 CommandSize
+        public int CommandSize
         {
             get
             {
@@ -165,7 +165,7 @@ namespace INDI
                 _CommandSize = value;
             }
         }
-        public Boolean Connected
+        public bool Connected
         {
             get
             {
@@ -534,17 +534,17 @@ namespace INDI
 							if (!target.Contains ("vector")) {
 								if (target.Contains ("blob")) {
 									try {
-										blobs.Add (new INDIBlob (name, label, format, Convert.FromBase64String (reader.Value.Replace ("\n", "")), Int32.Parse (length)));
+										blobs.Add (new INDIBlob (name, label, format, Convert.FromBase64String (reader.Value.Replace ("\n", "")), int.Parse (length)));
 									}
 									catch {
-										blobs.Add (new INDIBlob (name, label, format, new byte[Int32.Parse (length)], Int32.Parse (length)));
+										blobs.Add (new INDIBlob (name, label, format, new byte[int.Parse (length)], int.Parse (length)));
 									}
 								}
 								if (target.Contains ("switch")) {
 									switches.Add (new INDISwitch (name, label, reader.Value.Replace ("\n", "").Contains ("On")));
 								}
 								if (target.Contains ("number")) {
-									numbers.Add (new INDINumber (name, label, format, Double.Parse (minimum), Double.Parse (maximum), Double.Parse (step), Double.Parse (reader.Value.Replace ("\n", ""))));
+									numbers.Add (new INDINumber (name, label, format, double.Parse (minimum), double.Parse (maximum), double.Parse (step), double.Parse (reader.Value.Replace ("\n", ""))));
 								}
 								if (target.Contains ("text")) {
 									texts.Add (new INDIText (name, label, reader.Value.Replace ("\n", "")));

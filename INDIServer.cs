@@ -27,8 +27,8 @@ namespace INDI
 {
     public class INDIServer : IDisposable
     {
-        Int32 _BufferSize = 32768;
-        public Int32 BufferSize
+        int _BufferSize = 32768;
+        public int BufferSize
         {
             get
             {
@@ -42,10 +42,10 @@ namespace INDI
         public List<INDIClient> Drivers = new List<INDIClient>();
         TcpListener server;
         Thread listenThread;
-        Boolean ThreadsRunning = true;
+        bool ThreadsRunning = true;
         string Address = "127.0.0.1:7624";
-        Boolean active;
-        public Boolean Active
+        bool active;
+        public bool Active
         {
             get
             {
@@ -99,7 +99,7 @@ namespace INDI
             try
             {
                 Uri uri = new Uri("http://" + Address);
-                Int32 port = 7624;
+                int port = 7624;
                 if(Address.Contains(":"))
                    port = uri.Port; 
                 server = new TcpListener(IPAddress.Parse(uri.Host), port);
@@ -187,7 +187,7 @@ namespace INDI
 
         }
 
-        private void _writeThread(Object client)
+        private void _writeThread(object client)
         {
             Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
             Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
@@ -215,7 +215,7 @@ namespace INDI
                 Thread.Sleep(100);
             }
         }
-        private void _readThread(Object client)
+        private void _readThread(object client)
         {
             Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
             Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
@@ -227,7 +227,7 @@ namespace INDI
                 try
                 {
                     byte[] m = new byte[BufferSize];
-                    Int32 bytesRead = s.Read(m, 0, BufferSize);
+                    int bytesRead = s.Read(m, 0, BufferSize);
                     if (bytesRead > 0)
                     {
                         message = Encoding.UTF8.GetString(m, 0, bytesRead);

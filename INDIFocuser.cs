@@ -193,7 +193,7 @@ namespace INDI
         #endregion
 
         #region Standard Methods
-        public void Move(INDIFocuserMotion dir, Double milliseconds)
+        public void Move(INDIFocuserMotion dir, double milliseconds)
         {
             Direction = dir;
             try
@@ -207,7 +207,7 @@ namespace INDI
             SetSwitch("FOCUS_ABORT_MOTION", "ABORT", true);
         }
 
-        public override void isNewNumber(Object sender, IsNewNumberEventArgs e)
+        public override void isNewNumber(object sender, IsNewNumberEventArgs e)
         {
             base.isNewNumber(sender, e);
             Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
@@ -225,7 +225,7 @@ namespace INDI
             }
         }
 
-        public override void isNewSwitch(Object sender, IsNewSwitchEventArgs e)
+        public override void isNewSwitch(object sender, IsNewSwitchEventArgs e)
         {
             base.isNewSwitch(sender, e);
             Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
@@ -243,7 +243,7 @@ namespace INDI
             }
         }
 
-        public override void isNewText(Object sender, IsNewTextEventArgs e)
+        public override void isNewText(object sender, IsNewTextEventArgs e)
         {
             base.isNewText(sender, e);
             Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
@@ -263,7 +263,7 @@ namespace INDI
         #endregion
 
         #region Standard Properties
-        public Double Speed
+        public double Speed
         {
             get
             {
@@ -288,7 +288,7 @@ namespace INDI
             }
         }
 
-        public Double RelativePosition
+        public double RelativePosition
         {
             get
             {
@@ -309,7 +309,7 @@ namespace INDI
             }
         }
 
-        public Double AbsolutePosition
+        public double AbsolutePosition
         {
             get
             {
@@ -347,7 +347,7 @@ namespace INDI
             {
                 try
                 {
-                    SetSwitchVector("FOCUS_MOTION", (Int32)value);
+                    SetSwitchVector("FOCUS_MOTION", (int)value);
                 }
                 catch
                 {

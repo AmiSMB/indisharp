@@ -107,7 +107,7 @@ namespace INDI
         #endregion
 
         #region Standard Properties
-        public Boolean Connected
+        public bool Connected
         {
             get
             {
@@ -158,7 +158,7 @@ namespace INDI
             }
         }
 
-        public Double SiderealTime
+        public double SiderealTime
         {
             get
             {
@@ -227,7 +227,7 @@ namespace INDI
             }
         }
 
-        public Double Latitude
+        public double Latitude
         {
             get
             {
@@ -250,7 +250,7 @@ namespace INDI
             }
         }
 
-        public Double Longitude
+        public double Longitude
         {
             get
             {
@@ -273,7 +273,7 @@ namespace INDI
             }
         }
 
-        public Double Elevation
+        public double Elevation
         {
             get
             {
@@ -296,7 +296,7 @@ namespace INDI
             }
         }
 
-        public Double AmbientTemperature
+        public double AmbientTemperature
         {
             get
             {
@@ -319,7 +319,7 @@ namespace INDI
             }
         }
 
-        public Double AmbientPressure
+        public double AmbientPressure
         {
             get
             {
@@ -342,7 +342,7 @@ namespace INDI
             }
         }
 
-        public Double AmbientHumidity
+        public double AmbientHumidity
         {
             get
             {
@@ -381,7 +381,7 @@ namespace INDI
             {
                 try
                 {
-                    SetSwitchVector("UPLOAD_MODE", (Int32)value);
+                    SetSwitchVector("UPLOAD_MODE", (int)value);
                 }
                 catch
                 {

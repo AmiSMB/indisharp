@@ -423,45 +423,45 @@ namespace INDI
             }
         }
 
-        public void SyncToAltAz(Double Altitude, Double Azimuth)
+        public void SyncToAltAz(double Altitude, double Azimuth)
         {
             CoordSet = INDICoordSet.SYNC;
-            Double[] values = { Altitude, Azimuth };
+            double[] values = { Altitude, Azimuth };
             SetNumberVector("HORIZONTAL_COORD", values);
 		}
 
-		public void SlewToAltAz(Double Altitude, Double Azimuth)
+		public void SlewToAltAz(double Altitude, double Azimuth)
 		{
 			CoordSet = INDICoordSet.SLEW;
-			Double[] values = { Altitude, Azimuth };
+			double[] values = { Altitude, Azimuth };
 			SetNumberVector("HORIZONTAL_COORD", values);
 		}
 
-		public void TrackToAltAz(Double Altitude, Double Azimuth)
+		public void TrackToAltAz(double Altitude, double Azimuth)
 		{
 			CoordSet = INDICoordSet.TRACK;
-			Double[] values = { Altitude, Azimuth };
+			double[] values = { Altitude, Azimuth };
 			SetNumberVector("HORIZONTAL_COORD", values);
 		}
 
-        public void SyncToRaDec(Double RightAscension, Double Declination)
+        public void SyncToRaDec(double RightAscension, double Declination)
         {
             CoordSet = INDICoordSet.SYNC;
-            Double[] values = { RightAscension, Declination };
+            double[] values = { RightAscension, Declination };
             SetNumberVector("EQUATORIAL_EOD_COORD", values);
 		}
 
-		public void SlewToRaDec(Double RightAscension, Double Declination)
+		public void SlewToRaDec(double RightAscension, double Declination)
 		{
 			CoordSet = INDICoordSet.SLEW;
-			Double[] values = { RightAscension, Declination };
+			double[] values = { RightAscension, Declination };
 			SetNumberVector("EQUATORIAL_EOD_COORD", values);
 		}
 
-		public void TrackToRaDec(Double RightAscension, Double Declination)
+		public void TrackToRaDec(double RightAscension, double Declination)
 		{
 			CoordSet = INDICoordSet.TRACK;
-			Double[] values = { RightAscension, Declination };
+			double[] values = { RightAscension, Declination };
 			SetNumberVector("EQUATORIAL_EOD_COORD", values);
 		}
 
@@ -476,7 +476,7 @@ namespace INDI
             }
         }
 
-        public override void isNewNumber(Object sender, IsNewNumberEventArgs e)
+        public override void isNewNumber(object sender, IsNewNumberEventArgs e)
         {
             base.isNewNumber(sender, e);
             Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
@@ -494,7 +494,7 @@ namespace INDI
             }
         }
 
-        public override void isNewSwitch(Object sender, IsNewSwitchEventArgs e)
+        public override void isNewSwitch(object sender, IsNewSwitchEventArgs e)
         {
             base.isNewSwitch(sender, e);
             Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
@@ -512,7 +512,7 @@ namespace INDI
             }
         }
 
-        public override void isNewText(Object sender, IsNewTextEventArgs e)
+        public override void isNewText(object sender, IsNewTextEventArgs e)
         {
             base.isNewText(sender, e);
             Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
@@ -532,7 +532,7 @@ namespace INDI
         #endregion
 
         #region Standard Properties
-        public Double RaJ2000
+        public double RaJ2000
         {
             get
             {
@@ -557,7 +557,7 @@ namespace INDI
             }
         }
 
-        public Double DecJ2000
+        public double DecJ2000
         {
             get
             {
@@ -582,7 +582,7 @@ namespace INDI
             }
         }
 
-        public Double Ra
+        public double Ra
         {
             get
             {
@@ -607,7 +607,7 @@ namespace INDI
             }
         }
 
-        public Double Dec
+        public double Dec
         {
             get
             {
@@ -632,7 +632,7 @@ namespace INDI
             }
         }
 
-        public Double Alt
+        public double Alt
         {
             get
             {
@@ -657,7 +657,7 @@ namespace INDI
             }
         }
 
-        public Double Az
+        public double Az
         {
             get
             {
@@ -682,7 +682,7 @@ namespace INDI
             }
 		}
 
-		public Boolean Parked
+		public bool Parked
 		{
 			get
 			{
@@ -707,7 +707,7 @@ namespace INDI
 			}
 		}
 
-		public Boolean Track
+		public bool Track
 		{
 			get
 			{
@@ -849,7 +849,7 @@ namespace INDI
             {
                 try
                 {
-                    SetSwitchVector("ON_COORD_SET", (Int32)value);
+                    SetSwitchVector("ON_COORD_SET", (int)value);
                 }
                 catch
                 {
@@ -874,7 +874,7 @@ namespace INDI
             {
                 try
                 {
-                    SetSwitchVector("TELESCOPE_SLEW_RATE", (Int32)value);
+                    SetSwitchVector("TELESCOPE_SLEW_RATE", (int)value);
                 }
                 catch
                 {
@@ -899,7 +899,7 @@ namespace INDI
             {
                 try
                 {
-                    SetSwitchVector("TELESCOPE_TRACK_RATE", (Int32)value);
+                    SetSwitchVector("TELESCOPE_TRACK_RATE", (int)value);
                 }
                 catch
                 {

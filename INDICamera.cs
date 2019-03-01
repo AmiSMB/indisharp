@@ -193,12 +193,15 @@ namespace INDI
         FLAT
     };
     #endregion
+
+    // TODO: major reworking required
+    // empty catch == bad!
     public class INDICamera : INDIDevice
 	{
-		public event EventHandler<INDICameraBlobEventArgs> IsNewBlob = null;
-        public event EventHandler<INDICameraNumberEventArgs> IsNewNumber = null;
-        public event EventHandler<INDICameraSwitchEventArgs> IsNewSwitch = null;
-        public event EventHandler<INDICameraTextEventArgs> IsNewText = null;
+		public event EventHandler<INDICameraBlobEventArgs> IsNewBlob;
+        public event EventHandler<INDICameraNumberEventArgs> IsNewNumber;
+        public event EventHandler<INDICameraSwitchEventArgs> IsNewSwitch;
+        public event EventHandler<INDICameraTextEventArgs> IsNewText;
         #region Constructors / Initialization
         public INDICamera(string name, INDIClient host, bool client = true)
             : base(name, host, client)
@@ -267,16 +270,14 @@ namespace INDI
         #endregion
 
         #region Standard Methods
-        public void StartExposure(Double duration, INDIFrameType type)
+        public void StartExposure(double duration, INDIFrameType type)
         {
             try
             {
-                SetSwitchVector("CCD_FRAME_TYPE", (Int32)type);
+                SetSwitchVector("CCD_FRAME_TYPE", (int)type);
                 SetNumber("CCD_EXPOSURE", "CCD_EXPOSURE_VALUE", duration);
             }
-            catch
-            {
-            }
+            catch { }
         }
 
         public void ResetFrame()
@@ -297,7 +298,7 @@ namespace INDI
             catch { }
         }
 
-        public override void isNewNumber(Object sender, IsNewNumberEventArgs e)
+        public override void isNewNumber(object sender, IsNewNumberEventArgs e)
         {
             base.isNewNumber(sender, e);
             Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
@@ -315,7 +316,7 @@ namespace INDI
             }
         }
 
-        public override void isNewSwitch(Object sender, IsNewSwitchEventArgs e)
+        public override void isNewSwitch(object sender, IsNewSwitchEventArgs e)
         {
             base.isNewSwitch(sender, e);
             Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
@@ -333,7 +334,7 @@ namespace INDI
             }
         }
 
-        public override void isNewText(Object sender, IsNewTextEventArgs e)
+        public override void isNewText(object sender, IsNewTextEventArgs e)
         {
             base.isNewText(sender, e);
             Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
@@ -351,7 +352,7 @@ namespace INDI
             }
         }
 
-        public override void isNewBlob(Object sender, IsNewBlobEventArgs e)
+        public override void isNewBlob(object sender, IsNewBlobEventArgs e)
         {
             base.isNewBlob(sender, e);
             Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
@@ -376,7 +377,7 @@ namespace INDI
         #endregion
 
         #region Standard Properties
-        public Boolean CompessionEnabled
+        public bool CompessionEnabled
         {
             set
             {
@@ -401,37 +402,37 @@ namespace INDI
             }
         }
 
-        public Int16 BayerX
+        public int BayerX
         {
             get
             {
                 try
                 {
-                    Int16.Parse(GetText("CCD_CFA", "CFA_OFFSET_X").Value);
+                    return int.Parse(GetText("CCD_CFA", "CFA_OFFSET_X").Value);
                 }
                 catch
                 {
+                    return 0;
                 }
-                return 0;
             }
         }
 
-        public Int16 BayerY
+        public int BayerY
         {
             get
             {
                 try
                 {
-                    Int16.Parse(GetText("CCD_CFA", "CFA_OFFSET_Y").Value);
+                    return int.Parse(GetText("CCD_CFA", "CFA_OFFSET_Y").Value);
                 }
                 catch
                 {
+                    return 0;
                 }
-                return 0;
             }
         }
 
-        public Double ExposureTime
+        public double ExposureTime
         {
             get
             {
@@ -446,7 +447,7 @@ namespace INDI
             }
         }
 
-        public Boolean CoolerStarted
+        public bool CoolerStarted
         {
             get
             {
@@ -454,8 +455,10 @@ namespace INDI
                 {
                     return GetSwitch("CCD_COOLER", "COOLER_ON").Value;
                 }
-                catch { }
-                return false;
+                catch
+                {
+                    return false;
+                }
             }
             set
             {
@@ -467,7 +470,7 @@ namespace INDI
             }
         }
 
-        public Double CoolerPower
+        public double CoolerPower
         {
             get
             {
@@ -475,8 +478,10 @@ namespace INDI
                 {
                     return GetNumber("CCD_COOLER_POWER", "CCD_COOLER_VALUE").Value;
                 }
-                catch { }
-                return 0;
+                catch
+                {
+                    return 0;
+                }
             }
             set
             {
@@ -488,7 +493,7 @@ namespace INDI
             }
         }
 
-        public Boolean CanSetCoolerPower
+        public bool CanSetCoolerPower
         {
             get
             {
@@ -496,23 +501,25 @@ namespace INDI
                 {
                     return GetNumberVector("CCD_COOLER_POWER").Permission == "rw";
                 }
-                catch { }
-                return false;
+                catch
+                {
+                    return false;
+                }
             }
         }
 
-        public Int16 BinX
+        public int BinX
         {
             get
             {
                 try
                 {
-                    return (Int16)GetNumber("CCD_BINNING", "HOR_BIN").Value;
+                    return (int)GetNumber("CCD_BINNING", "HOR_BIN").Value;
                 }
                 catch
                 {
+                    return 0;
                 }
-                return 0;
             }
             set
             {
@@ -526,13 +533,13 @@ namespace INDI
             }
         }
 
-        public Int16 BinY
+        public int BinY
         {
             get
             {
                 try
                 {
-                    return (Int16)GetNumber("CCD_BINNING", "VER_BIN").Value;
+                    return (int)GetNumber("CCD_BINNING", "VER_BIN").Value;
                 }
                 catch
                 {
@@ -551,48 +558,48 @@ namespace INDI
             }
         }
 
-        public Int16 MaxBinX
+        public int MaxBinX
         {
             get
             {
                 try
                 {
-                    return (Int16)GetNumber("CCD_BINNING", "HOR_BIN").Max;
+                    return (int)GetNumber("CCD_BINNING", "HOR_BIN").Max;
                 }
                 catch
                 {
+                    return 0;
                 }
-                return 0;
             }
         }
 
-        public Int16 MaxBinY
+        public int MaxBinY
         {
             get
             {
                 try
                 {
-                    return (Int16)GetNumber("CCD_BINNING", "VER_BIN").Max;
+                    return (int)GetNumber("CCD_BINNING", "VER_BIN").Max;
                 }
                 catch
                 {
+                    return 0;
                 }
-                return 0;
             }
         }
 
-        public Int32 StartX
+        public int StartX
         {
             get
             {
                 try
                 {
-                    return (Int16)GetNumber("CCD_FRAME", "X").Value;
+                    return (int)GetNumber("CCD_FRAME", "X").Value;
                 }
                 catch
                 {
+                    return 0;
                 }
-                return 0;
             }
             set
             {
@@ -606,18 +613,18 @@ namespace INDI
             }
         }
 
-        public Int32 StartY
+        public int StartY
         {
             get
             {
                 try
                 {
-                    return (Int16)GetNumber("CCD_FRAME", "Y").Value;
+                    return (int)GetNumber("CCD_FRAME", "Y").Value;
                 }
                 catch
                 {
+                    return 0;
                 }
-                return 0;
             }
             set
             {
@@ -631,18 +638,18 @@ namespace INDI
             }
         }
 
-        public Int32 Width
+        public int Width
         {
             get
             {
                 try
                 {
-                    return (Int16)GetNumber("CCD_FRAME", "WIDTH").Value;
+                    return (int)GetNumber("CCD_FRAME", "WIDTH").Value;
                 }
                 catch
                 {
+                    return 0;
                 }
-                return 0;
             }
             set
             {
@@ -656,18 +663,18 @@ namespace INDI
             }
         }
 
-        public Int32 Height
+        public int Height
         {
             get
             {
                 try
                 {
-                    return (Int16)GetNumber("CCD_FRAME", "HEIGHT").Value;
+                    return (int)GetNumber("CCD_FRAME", "HEIGHT").Value;
                 }
                 catch
                 {
+                    return 0;
                 }
-                return 0;
             }
             set
             {
@@ -681,37 +688,37 @@ namespace INDI
             }
         }
 
-        public Int32 FullWidth
+        public int FullWidth
         {
             get
             {
                 try
                 {
-                    return (Int16)GetNumber("CCD_INFO", "CCD_MAX_X").Value;
+                    return (int)GetNumber("CCD_INFO", "CCD_MAX_X").Value;
                 }
                 catch
                 {
+                    return 0;
                 }
-                return 0;
             }
         }
 
-        public Int32 FullHeight
+        public int FullHeight
         {
             get
             {
                 try
                 {
-                    return (Int16)GetNumber("CCD_INFO", "CCD_MAX_Y").Value;
+                    return (int)GetNumber("CCD_INFO", "CCD_MAX_Y").Value;
                 }
                 catch
                 {
+                    return 0;
                 }
-                return 0;
             }
         }
 
-        public Double MinExposure
+        public double MinExposure
         {
             get
             {
@@ -721,12 +728,12 @@ namespace INDI
                 }
                 catch
                 {
+                    return 0.0;
                 }
-                return 0.0;
             }
         }
 
-        public Double MaxExposure
+        public double MaxExposure
         {
             get
             {
@@ -736,12 +743,12 @@ namespace INDI
                 }
                 catch
                 {
+                    return 0.0;
                 }
-                return 0.0;
             }
         }
 
-        public Double ExposureStep
+        public double ExposureStep
         {
             get
             {
@@ -751,12 +758,12 @@ namespace INDI
                 }
                 catch
                 {
+                    return 0.0;
                 }
-                return 0.0;
             }
         }
 
-        public Double MaxADU
+        public double MaxADU
         {
             get
             {
@@ -766,12 +773,12 @@ namespace INDI
                 }
                 catch
                 {
+                    return 0.0;
                 }
-                return 0.0;
             }
         }
 
-        public Double PixelSizeX
+        public double PixelSizeX
         {
             get
             {
@@ -781,12 +788,12 @@ namespace INDI
                 }
                 catch
                 {
+                    return 0.0;
                 }
-                return 0.0;
             }
         }
 
-        public Double PixelSizeY
+        public double PixelSizeY
         {
             get
             {
@@ -796,12 +803,12 @@ namespace INDI
                 }
                 catch
                 {
+                    return 0.0;
                 }
-                return 0.0;
             }
         }
 
-        public Double CCDTemperature
+        public double CCDTemperature
         {
             get
             {
@@ -811,8 +818,8 @@ namespace INDI
                 }
                 catch
                 {
+                    return 0.0;
                 }
-                return 0.0;
             }
             set
             {
@@ -829,7 +836,7 @@ namespace INDI
             }
         }
 
-        public Boolean CanSetCCDTemperature
+        public bool CanSetCCDTemperature
         {
             get
             {
@@ -839,8 +846,8 @@ namespace INDI
                 }
                 catch
                 {
+                    return false;
                 }
-                return false;
             }
         }
         #endregion

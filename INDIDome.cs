@@ -255,7 +255,7 @@ namespace INDI
         #endregion
 
         #region Standard Methods
-        public void Move(INDIDomeMotion dir, Double milliseconds)
+        public void Move(INDIDomeMotion dir, double milliseconds)
         {
             Direction = dir;
             try
@@ -276,7 +276,7 @@ namespace INDI
         {
             try
             {
-                SetSwitchVector("DOME_GOTO", (Int32)INDIDomeGoTo.HOME);
+                SetSwitchVector("DOME_GOTO", (int)INDIDomeGoTo.HOME);
             }
             catch { }
         }
@@ -284,12 +284,12 @@ namespace INDI
         {
             try
             {
-                SetSwitchVector("DOME_GOTO", (Int32)INDIDomeGoTo.PARK);
+                SetSwitchVector("DOME_GOTO", (int)INDIDomeGoTo.PARK);
             }
             catch { }
         }
 
-        public override void isNewNumber(Object sender, IsNewNumberEventArgs e)
+        public override void isNewNumber(object sender, IsNewNumberEventArgs e)
         {
             base.isNewNumber(sender, e);
             Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
@@ -307,7 +307,7 @@ namespace INDI
             }
         }
 
-        public override void isNewSwitch(Object sender, IsNewSwitchEventArgs e)
+        public override void isNewSwitch(object sender, IsNewSwitchEventArgs e)
         {
             base.isNewSwitch(sender, e);
             Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
@@ -325,7 +325,7 @@ namespace INDI
             }
         }
 
-        public override void isNewText(Object sender, IsNewTextEventArgs e)
+        public override void isNewText(object sender, IsNewTextEventArgs e)
         {
             base.isNewText(sender, e);
             Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
@@ -345,7 +345,7 @@ namespace INDI
         #endregion
 
         #region Standard Properties
-        public Double Speed
+        public double Speed
         {
             get
             {
@@ -366,7 +366,7 @@ namespace INDI
             }
         }
 
-        public Double RelativePosition
+        public double RelativePosition
         {
             get
             {
@@ -387,7 +387,7 @@ namespace INDI
             }
         }
 
-        public Double AbsolutePosition
+        public double AbsolutePosition
         {
             get
             {
@@ -408,7 +408,7 @@ namespace INDI
             }
         }
 
-        public Double HomePosition
+        public double HomePosition
         {
             get
             {
@@ -429,7 +429,7 @@ namespace INDI
             }
         }
 
-        public Double ParkPosition
+        public double ParkPosition
         {
             get
             {
@@ -450,7 +450,7 @@ namespace INDI
             }
         }
 
-        public Double AutoSyncThreshold
+        public double AutoSyncThreshold
         {
             get
             {
@@ -471,7 +471,7 @@ namespace INDI
             }
         }
 
-        Boolean Slaving
+        bool Slaving
         {
             get
             {
@@ -496,7 +496,7 @@ namespace INDI
             }
         }
 
-        public Double Radius
+        public double Radius
         {
             get
             {
@@ -517,7 +517,7 @@ namespace INDI
             }
         }
 
-        public Double ShutterWidth
+        public double ShutterWidth
         {
             get
             {
@@ -538,7 +538,7 @@ namespace INDI
             }
         }
 
-        public Double NorthDisplacement
+        public double NorthDisplacement
         {
             get
             {
@@ -559,7 +559,7 @@ namespace INDI
             }
         }
 
-        public Double EastDisplacement
+        public double EastDisplacement
         {
             get
             {
@@ -580,7 +580,7 @@ namespace INDI
             }
         }
 
-        public Double UpDisplacement
+        public double UpDisplacement
         {
             get
             {
@@ -601,7 +601,7 @@ namespace INDI
             }
         }
 
-        public Double OpticsDistance
+        public double OpticsDistance
         {
             get
             {
@@ -639,7 +639,7 @@ namespace INDI
             {
                 try
                 {
-                    SetSwitchVector("DOME_SHUTTER", (Int32)value);
+                    SetSwitchVector("DOME_SHUTTER", (int)value);
                 }
                 catch
                 {
@@ -664,7 +664,7 @@ namespace INDI
             {
                 try
                 {
-                    SetSwitchVector("DOME_MOTION", (Int32)value);
+                    SetSwitchVector("DOME_MOTION", (int)value);
                 }
                 catch
                 {

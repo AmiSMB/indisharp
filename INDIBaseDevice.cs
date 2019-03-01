@@ -247,7 +247,7 @@ namespace INDI
             NumberVector v = GetNumberVector(vector);
             if (v != null)
             {
-                for (Int32 i = 0; i < v.Values.Count; i++)
+                for (int i = 0; i < v.Values.Count; i++)
                 {
                     if (v.Values[i].Name == name)
                         return v.Values[i];
@@ -261,7 +261,7 @@ namespace INDI
             TextVector v = GetTextVector(vector);
             if (v != null)
             {
-                for (Int32 i = 0; i < v.Values.Count; i++)
+                for (int i = 0; i < v.Values.Count; i++)
                 {
                     if (v.Values[i].Name == name)
                         return v.Values[i];
@@ -275,7 +275,7 @@ namespace INDI
             SwitchVector v = GetSwitchVector(vector);
             if (v != null)
             {
-                for (Int32 i = 0; i < v.Values.Count; i++)
+                for (int i = 0; i < v.Values.Count; i++)
                 {
                     if (v.Values[i].Name == name)
                         return v.Values[i];
@@ -289,7 +289,7 @@ namespace INDI
             BlobVector v = GetBlobVector(vector);
             if (v != null)
             {
-                for (Int32 i = 0; i < v.Values.Count; i++)
+                for (int i = 0; i < v.Values.Count; i++)
                 {
                     if (v.Values[i].Name == name)
                         return v.Values[i];
@@ -298,7 +298,7 @@ namespace INDI
             return null;
         }
 
-        public string SetVector(string name, byte[][] blobs, Boolean[] switches, string[] texts, Double[] numbers)
+        public string SetVector(string name, byte[][] blobs, bool[] switches, string[] texts, double[] numbers)
         {
             if (blobs != null)
                 return SetBlobVector(name, blobs);
@@ -311,13 +311,13 @@ namespace INDI
             return "";
         }
 
-        public string SetNumber(string vector, string name, Double value)
+        public string SetNumber(string vector, string name, double value)
         {
             NumberVector v = GetNumberVector(vector);
             if (v == null)
                 throw new ArgumentException();
-            Double[] values = new Double[v.Values.Count];
-            for (Int32 i = 0; i < values.Length; i++)
+            double[] values = new double[v.Values.Count];
+            for (int i = 0; i < values.Length; i++)
             {
                 if (v.Values[i].Name == name)
                     values[i] = value;
@@ -333,7 +333,7 @@ namespace INDI
             if (v == null)
                 throw new ArgumentException();
             string[] values = new string[v.Values.Count];
-            for (Int32 i = 0; i < values.Length; i++)
+            for (int i = 0; i < values.Length; i++)
             {
                 if (v.Values[i].Name == name)
                     values[i] = value;
@@ -343,13 +343,13 @@ namespace INDI
             return SetTextVector(vector, values);
         }
 
-        public string SetSwitch(string vector, string name, Boolean value)
+        public string SetSwitch(string vector, string name, bool value)
         {
             SwitchVector v = GetSwitchVector(vector);
             if (v == null)
                 throw new ArgumentException();
-            Boolean[] values = new Boolean[v.Values.Count];
-            for (Int32 i = 0; i < values.Length; i++)
+            bool[] values = new bool[v.Values.Count];
+            for (int i = 0; i < values.Length; i++)
             {
                 if (v.Values[i].Name == name)
                 {
@@ -376,7 +376,7 @@ namespace INDI
             if (v == null)
                 throw new ArgumentException();
             byte[][] values = new byte[v.Values.Count][];
-            for (Int32 i = 0; i < values.Length; i++)
+            for (int i = 0; i < values.Length; i++)
             {
                 if (v.Values[i].Name == name)
                     values[i] = value;
@@ -386,12 +386,12 @@ namespace INDI
             return SetBlobVector(vector, values);
         }
 
-        public string SetNumberVector(string vector, Double[] values)
+        public string SetNumberVector(string vector, double[] values)
         {
             if (GetNumberVector(vector) == null)
                 throw new ArgumentException();
-            XElement[] items = new XElement[values.Length];
-            for (Int32 i = 0; i < GetNumberVector(vector).Values.Count; i++)
+            var items = new XElement[values.Length];
+            for (var i = 0; i < GetNumberVector(vector).Values.Count; i++)
             {
                 items[i] = new XElement("oneNumber", new XAttribute("name", GetNumberVector(vector).Values[i].Name), values[i].ToString().Replace(",", "."));
                 GetNumberVector(vector).Values[i].Value = values[i];
@@ -412,10 +412,10 @@ namespace INDI
             if (GetTextVector(vector) == null)
                 throw new ArgumentException();
             XElement[] items = new XElement[values.Length];
-            for (Int32 i = 0; i < GetTextVector(vector).Values.Count; i++)
+            for (int i = 0; i < GetTextVector(vector).Values.Count; i++)
             {
-                items[i] = new XElement("oneText", new XAttribute("name", GetTextVector(vector).Values[i].Name), values[i].ToString());
-                GetTextVector(vector).Values[i].Value = values[i].ToString();
+                items[i] = new XElement("oneText", new XAttribute("name", GetTextVector(vector).Values[i].Name), values[i]);
+                GetTextVector(vector).Values[i].Value = values[i];
             }
             string ret =
                 new XElement("newTextVector",
@@ -428,12 +428,12 @@ namespace INDI
             return ret;
         }
 
-        public string SetSwitchVector(string vector, Int32 index)
+        public string SetSwitchVector(string vector, int index)
         {
             if (GetSwitchVector(vector) == null)
                 throw new ArgumentException();
             XElement[] items = new XElement[GetSwitchVector(vector).Values.Count];
-            for (Int32 i = 0; i < GetSwitchVector(vector).Values.Count; i++)
+            for (int i = 0; i < GetSwitchVector(vector).Values.Count; i++)
             {
                 items[i] = new XElement("oneSwitch", new XAttribute("name", GetSwitchVector(vector).Values[i].Name), (i == index ? "On" : "Off"));
                 GetSwitchVector(vector).Values[i].Value = (i == index);
@@ -449,12 +449,12 @@ namespace INDI
             return ret;
         }
 
-        public string SetSwitchVector(string vector, Boolean[] values)
+        public string SetSwitchVector(string vector, bool[] values)
         {
             if (GetSwitchVector(vector) == null)
                 throw new ArgumentException();
             XElement[] items = new XElement[values.Length];
-            for (Int32 i = 0; i < GetSwitchVector(vector).Values.Count; i++)
+            for (int i = 0; i < GetSwitchVector(vector).Values.Count; i++)
             {
                 items[i] = new XElement("oneSwitch", new XAttribute("name", GetSwitchVector(vector).Values[i].Name), (values[i] ? "On" : "Off"));
                 GetSwitchVector(vector).Values[i].Value = values[i];
@@ -473,7 +473,7 @@ namespace INDI
             if (GetBlobVector(vector) == null)
                 throw new ArgumentException();
             XElement[] items = new XElement[values.Length];
-            for (Int32 i = 0; i < GetBlobVector(vector).Values.Count; i++)
+            for (int i = 0; i < GetBlobVector(vector).Values.Count; i++)
             {
                 string data = Convert.ToBase64String(values[i]);
                 items[i] = new XElement("oneBlob", new XAttribute("name", GetBlobVector(vector).Values[i].Name), new XAttribute("format", GetBlobVector(vector).Values[i].Format), new XAttribute("size", data.Length), data);
@@ -517,7 +517,7 @@ namespace INDI
                 if ((name != "" && vector.Name == name) || name == "")
                 {
                     XElement[] items = new XElement[vector.Values.Count];
-                    for (Int32 i = 0; i < vector.Values.Count; i++)
+                    for (int i = 0; i < vector.Values.Count; i++)
                     {
                         items[i] = new XElement("defNumber",
                             new XAttribute("label", vector.Values[i].Label),
@@ -550,12 +550,12 @@ namespace INDI
                 if ((name != "" && vector.Name == name) || name == "")
                 {
                     XElement[] items = new XElement[vector.Values.Count];
-                    for (Int32 i = 0; i < vector.Values.Count; i++)
+                    for (int i = 0; i < vector.Values.Count; i++)
                     {
                         items[i] = new XElement("defText",
                             new XAttribute("label", vector.Values[i].Label),
                             new XAttribute("name", vector.Values[i].Name),
-                            vector.Values[i].Value.ToString());
+                            vector.Values[i].Value);
                     }
                     ret +=
                         new XElement("defTextVector",
@@ -579,7 +579,7 @@ namespace INDI
                 if ((name != "" && vector.Name == name) || name == "")
                 {
                     XElement[] items = new XElement[vector.Values.Count];
-                    for (Int32 i = 0; i < vector.Values.Count; i++)
+                    for (int i = 0; i < vector.Values.Count; i++)
                     {
                         items[i] = new XElement("defSwitch",
                             new XAttribute("label", vector.Values[i].Label),
@@ -609,7 +609,7 @@ namespace INDI
                 if ((name != "" && vector.Name == name) || name == "")
                 {
                     XElement[] items = new XElement[vector.Values.Count];
-                    for (Int32 i = 0; i < vector.Values.Count; i++)
+                    for (int i = 0; i < vector.Values.Count; i++)
                     {
                         items[i] = new XElement("defBlob",
                             new XAttribute("label", vector.Values[i].Label),

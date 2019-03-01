@@ -32,7 +32,7 @@ namespace INDI.Forms
         public string deviceSelected = "";
         public INDIChooser(string address = "127.0.0.1", int port = 7624)
         {
-            Int32 y = 15;
+            int y = 15;
             Label l = new Label();
             l.Text = "Connect to address:";
             l.Location = new Point(5, y);
@@ -118,7 +118,7 @@ namespace INDI.Forms
             this.FormBorderStyle = FormBorderStyle.FixedToolWindow;
         }
 
-        void Indi_DeviceAdded(Object sender, DeviceAddedEventArgs e)
+        void Indi_DeviceAdded(object sender, DeviceAddedEventArgs e)
         {
             try
             {
@@ -136,14 +136,14 @@ namespace INDI.Forms
             }
         }
 
-        void Device_SelectedIndexChanged(Object sender, EventArgs e)
+        void Device_SelectedIndexChanged(object sender, EventArgs e)
         {
             deviceSelected = Device.SelectedItem.ToString();
         }
     }
     public class INDIForm : Form
     {
-        public Boolean Connected { get { return server.Connected; } }
+        public bool Connected { get { return server.Connected; } }
         TabControl DevicesConnected = new TabControl();
         string Device;
         INDIClient server;
@@ -178,7 +178,7 @@ namespace INDI.Forms
             }
         }
 
-        void _FormClosing(Object sender, EventArgs e)
+        void _FormClosing(object sender, EventArgs e)
         {
             this.FormClosing -= _FormClosing;
             this.Controls.Clear();
@@ -186,7 +186,7 @@ namespace INDI.Forms
                 server.Dispose();
         }
 
-        Boolean ChildPresent(Control c, string name)
+        bool ChildPresent(Control c, string name)
         {
             try
             {
@@ -285,7 +285,7 @@ namespace INDI.Forms
             });
         }
 
-        void IsNewSwitch(Object sender, IsNewSwitchEventArgs e)
+        void IsNewSwitch(object sender, IsNewSwitchEventArgs e)
         {
             Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
             Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
@@ -321,7 +321,7 @@ namespace INDI.Forms
                                     vector = (GroupBox)ctl.Controls.Find(e.Vector.Name, false)[0];
                                     if (vector.Controls.Count >= e.Vector.Values.Count)
                                         goto setSwitches;
-                                    Int32 y = 20;
+                                    int y = 20;
                                     vector.Size = new Size(455, 20 + e.Vector.Values.Count * 28);
                                     for (int k = 1; k < vector.Parent.Controls.Count; k++)
                                         vector.Parent.Controls[k].Location = new Point(vector.Parent.Controls[k].Location.X, vector.Parent.Controls[k - 1].Location.Y + vector.Parent.Controls[k - 1].Size.Height + 5);
@@ -384,7 +384,7 @@ namespace INDI.Forms
             }
         }
 
-        void IsNewNumber(Object sender, IsNewNumberEventArgs e)
+        void IsNewNumber(object sender, IsNewNumberEventArgs e)
         {
             Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
             Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
@@ -420,7 +420,7 @@ namespace INDI.Forms
                                     vector = (GroupBox)ctl.Controls.Find(e.Vector.Name, false)[0];
                                     if (vector.Controls.Count >= e.Vector.Values.Count)
                                         goto setNumbers;
-                                    Int32 y = 20;
+                                    int y = 20;
                                     vector.Size = new Size(455, 20 + e.Vector.Values.Count * 28);
                                     for (int k = 1; k < vector.Parent.Controls.Count; k++)
                                         vector.Parent.Controls[k].Location = new Point(vector.Parent.Controls[k].Location.X, vector.Parent.Controls[k - 1].Location.Y + vector.Parent.Controls[k - 1].Size.Height + 5);
@@ -467,7 +467,7 @@ namespace INDI.Forms
             }
         }
 
-        void IsNewText(Object sender, IsNewTextEventArgs e)
+        void IsNewText(object sender, IsNewTextEventArgs e)
         {
             Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
             Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
@@ -503,7 +503,7 @@ namespace INDI.Forms
                                     vector = (GroupBox)ctl.Controls.Find(e.Vector.Name, false)[0];
                                     if (vector.Controls.Count >= e.Vector.Values.Count)
                                         goto setTexts;
-                                    Int32 y = 20;
+                                    int y = 20;
                                     vector.Size = new Size(455, 20 + e.Vector.Values.Count * 28);
                                     for (int k = 1; k < vector.Parent.Controls.Count; k++)
                                         vector.Parent.Controls[k].Location = new Point(vector.Parent.Controls[k].Location.X, vector.Parent.Controls[k - 1].Location.Y + vector.Parent.Controls[k - 1].Size.Height + 5);
@@ -543,7 +543,7 @@ namespace INDI.Forms
             }
         }
 
-        void IsDelProperty(Object sender, IsDelPropertyEventArgs e)
+        void IsDelProperty(object sender, IsDelPropertyEventArgs e)
         {
             Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
             Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
@@ -579,7 +579,7 @@ namespace INDI.Forms
             }
         }
 
-        void valueChanged(Object sender, EventArgs e)
+        void valueChanged(object sender, EventArgs e)
         {
             try
             {
@@ -592,7 +592,7 @@ namespace INDI.Forms
                 }
                 if (type.StartsWith("SELECT_"))
                 {
-                    Int32 index = 0;
+                    int index = 0;
                     for (index = 0; index < ((Control)sender).Parent.Controls.Count; index++)
                     {
                         if (((RadioButton)((Control)sender).Parent.Controls[index]).Checked)
@@ -602,23 +602,23 @@ namespace INDI.Forms
                 }
                 if (type.StartsWith("NUMBER_"))
                 {
-                    Double val = 0;
+                    double val = 0;
                     if (type.Contains("TIME_LST") || type.Contains("COORD"))
                     {
                         string[] dt = ((TextBox)sender).Text.Split(":".ToCharArray());
                         if (dt.Length == 3)
                         {
                             double v = 0;
-                            if (Double.TryParse(dt[0], out v))
+                            if (double.TryParse(dt[0], out v))
                                 val += v;
-                            if (Double.TryParse(dt[1], out v))
+                            if (double.TryParse(dt[1], out v))
                                 val += v / 60;
-                            if (Double.TryParse(dt[2], out v))
+                            if (double.TryParse(dt[2], out v))
                                 val += v / 3600;
                         }
                         server.GetDevice(device).SetNumber(vector, type.Replace("NUMBER_", ""), val);
                     }
-                    else if (Double.TryParse(((TextBox)sender).Text, out val))
+                    else if (double.TryParse(((TextBox)sender).Text, out val))
                         server.GetDevice(device).SetNumber(vector, type.Replace("NUMBER_", ""), val);
                 }
                 if (type.StartsWith("TEXT_"))

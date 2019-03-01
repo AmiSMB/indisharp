@@ -156,7 +156,7 @@ namespace INDI
         #endregion
 
         #region Standard Methods
-        public override void isNewNumber(Object sender, IsNewNumberEventArgs e)
+        public override void isNewNumber(object sender, IsNewNumberEventArgs e)
         {
             base.isNewNumber(sender, e);
             Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
@@ -174,7 +174,7 @@ namespace INDI
             }
         }
 
-        public override void isNewSwitch(Object sender, IsNewSwitchEventArgs e)
+        public override void isNewSwitch(object sender, IsNewSwitchEventArgs e)
         {
             base.isNewSwitch(sender, e);
             Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
@@ -192,7 +192,7 @@ namespace INDI
             }
         }
 
-        public override void isNewText(Object sender, IsNewTextEventArgs e)
+        public override void isNewText(object sender, IsNewTextEventArgs e)
         {
             base.isNewText(sender, e);
             Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
@@ -211,7 +211,7 @@ namespace INDI
         }
         #endregion
 		#region Standard Properties
-		public Int32 FilterSlots
+		public int FilterSlots
 		{
 			get
 			{
@@ -226,13 +226,13 @@ namespace INDI
 			}
 		}
 
-        public Int32 FilterSlot
+        public int FilterSlot
         {
             get
             {
                 try
                 {
-                    return (Int32)GetNumber("FILTER_SLOT", "FILTER_SLOT_VALUE").Value;
+                    return (int)GetNumber("FILTER_SLOT", "FILTER_SLOT_VALUE").Value;
                 }
                 catch
                 {
@@ -243,7 +243,7 @@ namespace INDI
             {
                 try
                 {
-                    Int32 v = value;
+                    int v = value;
                     if (v < 1)
                         v = 1;
                     SetNumber("FILTER_SLOT", "FILTER_SLOT_VALUE", v);

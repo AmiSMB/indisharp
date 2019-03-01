@@ -207,7 +207,7 @@ namespace INDI
         #endregion
 
         #region Standard Methods
-        public void StartCapture(Double duration)
+        public void StartCapture(double duration)
         {
             try
             {
@@ -227,7 +227,7 @@ namespace INDI
             catch { }
         }
 
-        public override void isNewNumber(Object sender, IsNewNumberEventArgs e)
+        public override void isNewNumber(object sender, IsNewNumberEventArgs e)
         {
             base.isNewNumber(sender, e);
             Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
@@ -245,7 +245,7 @@ namespace INDI
             }
         }
 
-        public override void isNewSwitch(Object sender, IsNewSwitchEventArgs e)
+        public override void isNewSwitch(object sender, IsNewSwitchEventArgs e)
         {
             base.isNewSwitch(sender, e);
             Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
@@ -263,7 +263,7 @@ namespace INDI
             }
         }
 
-        public override void isNewText(Object sender, IsNewTextEventArgs e)
+        public override void isNewText(object sender, IsNewTextEventArgs e)
         {
             base.isNewText(sender, e);
             Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
@@ -281,7 +281,7 @@ namespace INDI
             }
         }
 
-        public override void isNewBlob(Object sender, IsNewBlobEventArgs e)
+        public override void isNewBlob(object sender, IsNewBlobEventArgs e)
         {
             base.isNewBlob(sender, e);
             Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
@@ -306,7 +306,7 @@ namespace INDI
         #endregion
 
 		#region Standard Properties
-        public Double CaptureTime
+        public double CaptureTime
         {
             get
             {
@@ -390,7 +390,7 @@ namespace INDI
 			}
 		}
 
-        public Boolean CoolerStarted
+        public bool CoolerStarted
         {
             get
             {
@@ -411,7 +411,7 @@ namespace INDI
             }
         }
 
-        public Double CoolerPower
+        public double CoolerPower
         {
             get
             {
@@ -432,7 +432,7 @@ namespace INDI
             }
         }
 
-        public Boolean CanSetCoolerPower
+        public bool CanSetCoolerPower
         {
             get
             {
@@ -445,7 +445,7 @@ namespace INDI
             }
         }
 
-        public Double MinCapture
+        public double MinCapture
         {
             get
             {
@@ -460,7 +460,7 @@ namespace INDI
             }
         }
 
-        public Double MaxCapture
+        public double MaxCapture
         {
             get
             {
@@ -475,7 +475,7 @@ namespace INDI
             }
         }
 
-        public Double CaptureStep
+        public double CaptureStep
         {
             get
             {
@@ -490,7 +490,7 @@ namespace INDI
             }
         }
 
-        public Double DetectorTemperature
+        public double DetectorTemperature
         {
             get
             {
@@ -518,7 +518,7 @@ namespace INDI
             }
         }
 
-        public Boolean CanSetDetectorTemperature
+        public bool CanSetDetectorTemperature
         {
             get
             {
