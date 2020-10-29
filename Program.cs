@@ -14,9 +14,9 @@ namespace INDI
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //INDIChooser chooser = new INDIChooser("raspberry", 7624);
+            //INDIChooser chooser = new INDIChooser("127.0.0.1", 7624);
             //Application.Run(chooser);
-            Application.Run(new INDIForm(new INDIClient("raspberry",7624), ""));
+            Application.Run(new INDIForm(new INDIClient("127.0.0.1",7624), ""));
         }
     }
 }
