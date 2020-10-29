@@ -757,7 +757,7 @@ namespace INDI
             }
         }
 
-        public string FocalLenght
+        public string FocalLength
         {
             get
             {
@@ -807,7 +807,7 @@ namespace INDI
             }
         }
 
-        public string GuiderFocalLenght
+        public string GuiderFocalLength
         {
             get
             {
