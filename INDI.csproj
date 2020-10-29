@@ -33,7 +33,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
-    <IntermediateOutputPath>C:\Users\Myang22\AppData\Local\Temp\vsB0A9.tmp\Debug\</IntermediateOutputPath>
+    <IntermediateOutputPath>C:\Users\GRANTF~1\AppData\Local\Temp\vs42BC.tmp\Debug\</IntermediateOutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>full</DebugType>
@@ -42,7 +42,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
-    <IntermediateOutputPath>C:\Users\Myang22\AppData\Local\Temp\vsB0A9.tmp\Release\</IntermediateOutputPath>
+    <IntermediateOutputPath>C:\Users\GRANTF~1\AppData\Local\Temp\vs42BC.tmp\Release\</IntermediateOutputPath>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject />
@@ -71,6 +71,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="INDICamera.cs" />
     <Compile Include="INDIDetector.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Forms\INDIForms.resx">
+      <DependentUpon>INDIForms.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)/Microsoft.CSharp.targets" />
   <Import Project="packages\NuGet.Build.Packaging.0.2.0\build\NuGet.Build.Packaging.targets" Condition="Exists('packages\NuGet.Build.Packaging.0.2.0\build\NuGet.Build.Packaging.targets')" />

@@ -14,7 +14,9 @@ namespace INDI
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new INDIForm(new INDIClient("burnterwaffle.freemyip.com", 7624)));
+            //INDIChooser chooser = new INDIChooser("raspberry", 7624);
+            //Application.Run(chooser);
+            Application.Run(new INDIForm(new INDIClient("raspberry",7624), ""));
         }
     }
 }
